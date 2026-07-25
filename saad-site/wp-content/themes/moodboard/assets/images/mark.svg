@@ -1,0 +1,7 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="homeiliora">
+  <circle cx="60" cy="60" r="59" fill="#F6F4F0" stroke="#DAD5C9" stroke-width="2"/>
+  <path d="M 34 82 L 60 44 L 86 82" fill="none" stroke="#26241F" stroke-width="8"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="60" cy="43" r="6.5" fill="#D9643A"/>
+  <line x1="30" y1="90" x2="90" y2="90" stroke="#3F5D42" stroke-width="4" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,41 @@
+# =====================================================================
+#  homeiliora — .gitignore
+#  Comments must be on their own line (inline comments are NOT supported).
+# =====================================================================
+
+# Secrets & environment (NEVER commit to a public repo)
+saad-site/wp-config.php
+.env
+*.pem
+*.key
+
+# Database dumps (contain the admin password hash) — keep private.
+# Restore locally with: wp db import <file>.sql
+backups/*.sql
+*.sql
+*.sql.gz
+
+# WordPress runtime / caches / logs (generated, not source)
+saad-site/wp-content/debug.log
+saad-site/wp-content/*.log
+saad-site/wp-content/cache/
+saad-site/wp-content/litespeed/
+saad-site/wp-content/uploads/litespeed/
+saad-site/wp-content/advanced-cache.php
+saad-site/wp-content/object-cache.php
+saad-site/wp-content/upgrade/
+saad-site/wp-content/uploads/cache/
+saad-site/.htaccess
+
+# Dependencies / build junk
+node_modules/
+vendor/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.tmp
+*.swp
+.idea/
+.vscode/
