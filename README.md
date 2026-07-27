@@ -21,6 +21,20 @@ Full-site-editing block theme. Highlights:
 - Open Graph / Twitter / Pinterest Rich-Pin meta
 
 ## Local setup
+
 Requires PHP 8, MySQL 8, WP-CLI. `wp-config.php` is gitignored — copy `saad-site/wp-config-sample.php` and set your DB credentials. Restore content/settings with `wp db import` from a private database dump.
+
+### Running the site locally
+
+```powershell
+powershell -ExecutionPolicy Bypass -File dev\start-local.ps1   # http://localhost:8080
+powershell -ExecutionPolicy Bypass -File dev\stop-local.ps1
+```
+
+`dev/start-local.ps1` starts MySQL and Apache from Laragon's binaries and confirms the site answers. It is safe to run twice — anything already running is left alone.
+
+Apache uses `dev/apache-homeiliora.conf` rather than Laragon's own configuration, which stays untouched. Laragon's `httpd.conf` is stock and only receives its settings when the Laragon GUI starts, so Apache launched on its own would load neither `mod_php` nor any vhost. The config also carries the WordPress permalink rewrite rules, because the site's `.htaccess` has no `# BEGIN WordPress` block — without them every URL except the homepage 404s.
+
+Paths are absolute. If Laragon updates its bundled Apache, PHP or MySQL, correct the version numbers in the three `Define` lines at the top of the config and in the two `$mysqld` / `$httpd` variables in `start-local.ps1`.
 
 > Not committed to this repo (by design): `wp-config.php` (secrets) and `backups/*.sql` (database dumps contain a password hash).

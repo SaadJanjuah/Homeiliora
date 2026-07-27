@@ -27,6 +27,10 @@ saad-site/wp-content/upgrade/
 saad-site/wp-content/uploads/cache/
 saad-site/.htaccess
 
+# Local dev server logs / pid (the config in dev/ is tracked, its output is not)
+dev/logs/
+*.pid
+
 # Dependencies / build junk
 node_modules/
 vendor/
