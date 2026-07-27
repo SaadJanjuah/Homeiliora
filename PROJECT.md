@@ -178,12 +178,20 @@ Ad slots & Saved feature (added 2026-07-26):
 - [x] Site-wide left + right sticky skyscraper rails (160x600) — injected globally via `wp_footer` (`moodboard_ad_rails()` in functions.php), so they appear on EVERY page incl. 404. CSS shows them only ≥1560px viewport (room in the gutters beside the 1200px column; hidden below to avoid overlap). Fixed position = no CLS.
 - [x] "Saved" bookmarks — client-side (localStorage, key `homeiliora_saved_v1`, no account). Nav "♥ Saved" tab with live count badge; "+ Save / ✓ Saved" button on every card; "Save this idea" toggle on posts; `/saved/` page (id 42) that lists saved items as moodboard cards with Remove. JS: `assets/js/bookmarks.js`. Disambiguated from the Pinterest "Pin it" hover button.
 
+Dark mode (added 2026-07-27):
+- [x] Light/dark theming with a header toggle beside the search icon. Defaults to the reader's OS setting (`prefers-color-scheme`); clicking stores an explicit choice in localStorage (`homeiliora_theme_v1`) that overrides the OS in both directions and syncs across tabs.
+- [x] No flash of light on load — a tiny inline script in `wp_head` (`moodboard_theme_no_flash_script`) applies the stored choice before first paint.
+- [x] Implemented by re-pointing the `--wp--preset--color--*` variables in `assets/css/dark.css`, so theme.json presets, block markup and `main.css` all follow from one place. dark.css contains no layout or component rules — if it fails to load the site is exactly as it was.
+- [x] Dark palette is warm charcoal, not neutral grey; terracotta and forest are lifted (`#D9643A`→`#E4764C`, `#3F5D42`→`#86A98A`) because the originals were chosen against warm plaster. Every text pairing verified at WCAG AA or better (lowest is 5.3:1).
+- [x] The logo has charcoal baked into the SVG, so a dark variant (`logo-stacked-dark.svg`) is swapped in by CSS. Both variants ship in the markup and CSS shows one — no flash, no JS.
+- [x] The footer stays a dark band in both themes (it is painted with the very presets dark mode flips, so its colours are pinned to their own tokens).
+
 Needs the user / real assets:
 - [ ] Real About-page voice (specific story) + a founder photo/illustration.
 - [ ] Replace placeholder featured images + shop-this-look images with real photography.
 - [ ] Run the Rank Math setup wizard (unlocks its OG/sitemap/schema — theme fallback steps aside automatically).
 - [ ] Wire the newsletter form + Contact form to Fluent Forms / an email provider (currently visual).
-- [ ] Brand the CookieYes banner (still default blue) to the terracotta/charcoal palette.
+- [ ] Brand the CookieYes banner (still default blue) to the terracotta/charcoal palette — it is also the one element that stays bright white in dark mode, since the plugin renders it outside the theme's styles.
 - [ ] ShortPixel API key; real ad code for the ad slots + in-content (Ad Inserter after 2nd H2); affiliate links in Shop-this-look.
 
 Not yet done:

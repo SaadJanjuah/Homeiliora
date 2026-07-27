@@ -5,13 +5,50 @@
  */
 
 /* ---------------------------------------------------------------------------
+   Local tokens — the light-mode values.
+   Everything here is a colour theme.json can't express: translucent veils,
+   shadow tints, and the few places a preset is used for its literal darkness
+   rather than its meaning. dark.css re-points these (and the theme.json
+   presets) for dark mode, so every rule below is written exactly once.
+--------------------------------------------------------------------------- */
+:root {
+	color-scheme: light;
+
+	/* Shadows are tinted with the brand charcoal, not pure black. */
+	--md-shadow-rgb: 38, 36, 31;
+
+	--md-hairline: rgba(38, 36, 31, 0.035);      /* graph-paper grid lines   */
+	--md-header-veil: rgba(246, 244, 240, 0.85); /* translucent sticky header */
+	--md-savebtn-bg: rgba(255, 255, 255, 0.92);  /* save pill on a photo     */
+	--md-fill-faint: rgba(218, 213, 201, 0.28);  /* ad-slot placeholder      */
+	--md-fill-fainter: rgba(218, 213, 201, 0.2); /* empty-state panel        */
+
+	/* The footer is a deliberate dark band in light mode, so it needs its own
+	   colours rather than the flipped presets. */
+	--md-footer-bg: var(--wp--preset--color--ink);
+	--md-footer-text: #F6F4F0;
+	--md-footer-nav: #DAD5C9;
+	--md-footer-meta: #C4A998;
+
+	/* Which theme-toggle icon is showing. Driven from here so the button has
+	   no conditional CSS of its own — and no flash before JS runs. */
+	--md-icon-sun: none;
+	--md-icon-moon: inline-flex;
+
+	/* Which logo variant is showing — the mark has baked-in charcoal ink, so
+	   dark mode swaps the file rather than filtering it. */
+	--md-logo-light: block;
+	--md-logo-dark: none;
+}
+
+/* ---------------------------------------------------------------------------
    Page texture — a barely-there hairline "graph paper" grid (spec §2.3)
 --------------------------------------------------------------------------- */
 body {
 	background-color: var(--wp--preset--color--base);
 	background-image:
-		linear-gradient(to right, rgba(38, 36, 31, 0.035) 1px, transparent 1px),
-		linear-gradient(to bottom, rgba(38, 36, 31, 0.035) 1px, transparent 1px);
+		linear-gradient(to right, var(--md-hairline) 1px, transparent 1px),
+		linear-gradient(to bottom, var(--md-hairline) 1px, transparent 1px);
 	background-size: 32px 32px;
 	background-attachment: fixed;
 }
@@ -24,7 +61,7 @@ body {
 	top: 0;
 	z-index: 100;
 	border-bottom: 1px solid var(--wp--preset--color--stone);
-	background-color: rgba(246, 244, 240, 0.85);
+	background-color: var(--md-header-veil);
 	-webkit-backdrop-filter: saturate(1.1) blur(8px);
 	backdrop-filter: saturate(1.1) blur(8px);
 }
@@ -35,6 +72,10 @@ body {
 	display: block;
 	height: auto;
 }
+/* Qualified with `img` to outrank the `.brand-logo img { display: block }`
+   above — otherwise both variants paint and the marks stack. */
+.brand-logo img.brand-logo__img--light { display: var(--md-logo-light); }
+.brand-logo img.brand-logo__img--dark { display: var(--md-logo-dark); }
 
 /* Navigation */
 .site-nav {
@@ -66,7 +107,7 @@ body {
 	background: var(--wp--preset--color--surface);
 	border: 1px solid var(--wp--preset--color--stone);
 	border-radius: 4px;
-	box-shadow: 0 16px 34px -18px rgba(38, 36, 31, 0.35);
+	box-shadow: 0 16px 34px -18px rgba(var(--md-shadow-rgb), 0.35);
 	padding: 0.35rem;
 	min-width: 230px;
 }
@@ -124,7 +165,10 @@ body {
 	border-radius: 4px;
 	overflow: hidden;
 	border: 1px solid var(--wp--preset--color--stone);
-	transition: transform 0.28s ease, box-shadow 0.28s ease;
+	/* Theme-swap colours ride along here rather than in the theme-toggle
+	   section below, so that rule cannot clobber the hover lift. */
+	transition: transform 0.28s ease, box-shadow 0.28s ease,
+		background-color 0.25s ease, border-color 0.25s ease;
 	will-change: transform;
 }
 .moodboard-card__image {
@@ -154,7 +198,7 @@ body {
 @media (hover: hover) and (min-width: 782px) {
 	.moodboard-card:hover {
 		transform: translateY(-4px);
-		box-shadow: 0 14px 30px -12px rgba(38, 36, 31, 0.28);
+		box-shadow: 0 14px 30px -12px rgba(var(--md-shadow-rgb), 0.28);
 	}
 	.moodboard-card:hover .moodboard-card__image img {
 		transform: scale(1.03);
@@ -223,7 +267,7 @@ body {
 --------------------------------------------------------------------------- */
 .quick-answer {
 	border-left: 3px solid var(--wp--preset--color--accent);
-	box-shadow: 0 10px 24px -18px rgba(38, 36, 31, 0.3);
+	box-shadow: 0 10px 24px -18px rgba(var(--md-shadow-rgb), 0.3);
 }
 .quick-answer__label { margin: 0; }
 
@@ -238,7 +282,7 @@ body {
 .product-card__link { margin: 0; }
 .product-card__link a { text-decoration: none; }
 @media (hover: hover) and (min-width: 782px) {
-	.product-card:hover { transform: translateY(-3px); box-shadow: 0 14px 28px -16px rgba(38,36,31,0.28); }
+	.product-card:hover { transform: translateY(-3px); box-shadow: 0 14px 28px -16px rgba(var(--md-shadow-rgb), 0.28); }
 }
 
 /* ---------------------------------------------------------------------------
@@ -319,7 +363,7 @@ body {
 	background: var(--wp--preset--color--accent);
 	border-radius: 999px;
 	text-decoration: none;
-	box-shadow: 0 6px 16px -6px rgba(38, 36, 31, 0.5);
+	box-shadow: 0 6px 16px -6px rgba(var(--md-shadow-rgb), 0.5);
 	opacity: 0;
 	transform: translateY(-4px);
 	transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
@@ -385,11 +429,11 @@ body {
 	font-weight: 600;
 	letter-spacing: 0.02em;
 	color: var(--wp--preset--color--ink);
-	background: rgba(255, 255, 255, 0.92);
+	background: var(--md-savebtn-bg);
 	border: 1px solid var(--wp--preset--color--stone);
 	border-radius: 999px;
 	cursor: pointer;
-	box-shadow: 0 4px 12px -6px rgba(38, 36, 31, 0.4);
+	box-shadow: 0 4px 12px -6px rgba(var(--md-shadow-rgb), 0.4);
 	transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
 }
 .save-btn:hover { transform: translateY(-1px); border-color: var(--wp--preset--color--clay); }
@@ -431,7 +475,7 @@ body {
 	padding: var(--wp--preset--spacing--60) var(--wp--preset--spacing--40);
 	border: 1px dashed var(--wp--preset--color--clay);
 	border-radius: 4px;
-	background: rgba(218, 213, 201, 0.2);
+	background: var(--md-fill-fainter);
 }
 .saved-empty__title {
 	font-family: var(--wp--preset--font-family--display);
@@ -479,14 +523,41 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
-   Footer nav — legible on the dark ink background
+   Footer — a dark band in BOTH themes.
+   The block markup paints it with the `ink` / `base` / `stone` / `clay`
+   presets, which are exactly the presets dark mode flips. Left alone the
+   footer would inverse into a glaring light slab at the foot of a dark page,
+   so its colours are pinned to their own tokens here. The preset classes
+   WordPress emits carry !important, hence the doubled-class specificity.
 --------------------------------------------------------------------------- */
-.footer-nav a {
-	color: var(--wp--preset--color--stone);
+.wp-block-group.site-footer {
+	background-color: var(--md-footer-bg) !important;
+}
+.site-footer,
+.site-footer .has-base-color,
+.site-footer .wp-block-site-title a {
+	color: var(--md-footer-text) !important;
+}
+.site-footer .has-stone-color {
+	color: var(--md-footer-nav) !important;
+}
+.site-footer .has-clay-color {
+	color: var(--md-footer-meta) !important;
+}
+/* !important because core ships
+   `.wp-block-navigation .wp-block-navigation-item__content.wp-block-navigation-item__content
+    { color: inherit }` — a deliberately doubled class, and more specific than
+   any reasonable selector here. Without this the links silently inherit the
+   footer's text colour instead of the softer tone this rule asks for, which
+   is what they did before dark mode landed. Hover is scoped a notch tighter
+   again so it still wins against the line above. */
+.site-footer .footer-nav a {
+	color: var(--md-footer-nav) !important;
 	text-decoration: none;
 }
-.footer-nav a:hover {
-	color: var(--wp--preset--color--accent);
+.site-footer .footer-nav a:hover,
+.site-footer .wp-block-site-title a:hover {
+	color: var(--wp--preset--color--accent) !important;
 }
 
 /* ---------------------------------------------------------------------------
@@ -520,7 +591,7 @@ body {
 	justify-content: center;
 	min-height: 280px;              /* reserves space for a 300x250 + padding */
 	margin-block: var(--wp--preset--spacing--50);
-	background-color: rgba(218, 213, 201, 0.28);
+	background-color: var(--md-fill-faint);
 	border: 1px dashed var(--wp--preset--color--clay);
 	border-radius: 4px;
 }
@@ -567,6 +638,56 @@ body {
 	.ad-slot--banner {
 		min-height: 100px;
 	}
+}
+
+/* ---------------------------------------------------------------------------
+   Theme toggle — sits beside the header search and matches its shape.
+   Which icon shows is decided by --md-icon-*, set in :root (light) and
+   re-set by dark.css, so the correct icon is painted server-side-first with
+   no JavaScript and no flash.
+--------------------------------------------------------------------------- */
+.theme-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.15rem;
+	height: 2.15rem;
+	padding: 0;
+	flex: 0 0 auto;
+	color: var(--wp--preset--color--ink);
+	background: transparent;
+	border: 1px solid var(--wp--preset--color--stone);
+	border-radius: 4px;
+	cursor: pointer;
+	transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+.theme-toggle:hover {
+	color: var(--wp--preset--color--accent);
+	border-color: var(--wp--preset--color--clay);
+}
+.theme-toggle svg {
+	width: 1.05rem;
+	height: 1.05rem;
+	display: block;
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 1.6;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+.theme-toggle__icon { align-items: center; justify-content: center; }
+.theme-toggle__icon--sun { display: var(--md-icon-sun); }
+.theme-toggle__icon--moon { display: var(--md-icon-moon); }
+
+/* Ease the swap between themes — but only the surfaces, never text, so
+   reading never smears. Suppressed under reduced-motion below.
+   .moodboard-card is deliberately absent: it already declares a `transition`
+   shorthand for its hover lift, and repeating the shorthand here would
+   replace it. Its colour transition is folded into that declaration instead. */
+body,
+.site-header,
+.wp-block-group.site-footer {
+	transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
 /* ---------------------------------------------------------------------------

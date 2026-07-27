@@ -1,0 +1,106 @@
+/**
+ * Moodboard — dark mode.
+ *
+ * This file only re-points tokens; it contains no layout and no component
+ * rules. Every visual rule lives once in main.css and reads a token, so dark
+ * mode cannot drift out of sync with light mode — and if this file fails to
+ * load, the site renders exactly as it did before.
+ *
+ * Two triggers, same values:
+ *   1. the OS asks for dark and the reader has not chosen otherwise
+ *   2. the reader picked dark with the header toggle (data-theme="dark")
+ * An explicit choice always wins, in both directions.
+ */
+
+/* ---------------------------------------------------------------------------
+   The dark palette — warm charcoals, not neutral greys, so terracotta and
+   forest still read as members of the same family. Both accents are lifted
+   (#D9643A -> #E4764C, #3F5D42 -> #86A98A) because the originals were picked
+   for contrast against warm plaster and go muddy on a dark ground.
+
+   Every text pairing meets WCAG AA:
+     ink on base 14.4:1   ink on surface 13.1:1   muted on base 6.5:1
+     accent on base 5.8:1  forest on base 6.7:1   ink on accent-soft 12.4:1
+--------------------------------------------------------------------------- */
+:root {
+	--md-dark-base: #1B1A17;
+	--md-dark-surface: #24221F;
+	--md-dark-ink: #EDE9E2;
+	--md-dark-muted: #A49D92;
+	--md-dark-stone: #3A3733;
+	--md-dark-clay: #7C6A5C;
+	--md-dark-accent: #E4764C;
+	--md-dark-accent-soft: #33231B;
+	--md-dark-forest: #86A98A;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		color-scheme: dark;
+
+		--wp--preset--color--base: var(--md-dark-base);
+		--wp--preset--color--surface: var(--md-dark-surface);
+		--wp--preset--color--ink: var(--md-dark-ink);
+		--wp--preset--color--muted: var(--md-dark-muted);
+		--wp--preset--color--stone: var(--md-dark-stone);
+		--wp--preset--color--clay: var(--md-dark-clay);
+		--wp--preset--color--accent: var(--md-dark-accent);
+		--wp--preset--color--accent-soft: var(--md-dark-accent-soft);
+		--wp--preset--color--forest: var(--md-dark-forest);
+
+		--md-shadow-rgb: 0, 0, 0;
+		--md-hairline: rgba(237, 233, 226, 0.05);
+		--md-header-veil: rgba(27, 26, 23, 0.86);
+		--md-savebtn-bg: rgba(36, 34, 31, 0.92);
+		--md-fill-faint: rgba(124, 106, 92, 0.16);
+		--md-fill-fainter: rgba(124, 106, 92, 0.12);
+
+		--md-footer-bg: #201E1B;
+		--md-footer-text: #EDE9E2;
+		--md-footer-nav: #B8B1A6;
+		--md-footer-meta: #9A9086;
+
+		--md-icon-sun: inline-flex;
+		--md-icon-moon: none;
+
+		--md-logo-light: none;
+		--md-logo-dark: block;
+	}
+}
+
+:root[data-theme="dark"] {
+	color-scheme: dark;
+
+	--wp--preset--color--base: var(--md-dark-base);
+	--wp--preset--color--surface: var(--md-dark-surface);
+	--wp--preset--color--ink: var(--md-dark-ink);
+	--wp--preset--color--muted: var(--md-dark-muted);
+	--wp--preset--color--stone: var(--md-dark-stone);
+	--wp--preset--color--clay: var(--md-dark-clay);
+	--wp--preset--color--accent: var(--md-dark-accent);
+	--wp--preset--color--accent-soft: var(--md-dark-accent-soft);
+	--wp--preset--color--forest: var(--md-dark-forest);
+
+	--md-shadow-rgb: 0, 0, 0;
+	--md-hairline: rgba(237, 233, 226, 0.05);
+	--md-header-veil: rgba(27, 26, 23, 0.86);
+	--md-savebtn-bg: rgba(36, 34, 31, 0.92);
+	--md-fill-faint: rgba(124, 106, 92, 0.16);
+	--md-fill-fainter: rgba(124, 106, 92, 0.12);
+
+	--md-footer-bg: #201E1B;
+	--md-footer-text: #EDE9E2;
+	--md-footer-nav: #B8B1A6;
+	--md-footer-meta: #9A9086;
+
+	--md-icon-sun: inline-flex;
+	--md-icon-moon: none;
+
+	--md-logo-light: none;
+	--md-logo-dark: block;
+}
+
+/* Photography is left untouched — the decor shots carry the site and dimming
+   them would be a downgrade. Only the logo swaps, and it does so by token
+   (see .brand-logo__img in main.css) rather than by a filter, because a
+   filter that lightens the charcoal wordmark also washes out the terracotta. */
