@@ -62,9 +62,6 @@
 
 		--md-icon-sun: inline-flex;
 		--md-icon-moon: none;
-
-		--md-logo-light: none;
-		--md-logo-dark: block;
 	}
 }
 
@@ -95,12 +92,11 @@
 
 	--md-icon-sun: inline-flex;
 	--md-icon-moon: none;
-
-	--md-logo-light: none;
-	--md-logo-dark: block;
 }
 
 /* Photography is left untouched — the decor shots carry the site and dimming
-   them would be a downgrade. Only the logo swaps, and it does so by token
-   (see .brand-logo__img in main.css) rather than by a filter, because a
-   filter that lightens the charcoal wordmark also washes out the terracotta. */
+   them would be a downgrade. The brand lockup needs nothing here either: its
+   mark is an inlined SVG painting with currentColor and the colour presets
+   above, and its wordmark is real text, so both follow the theme on their
+   own. (An <img>-referenced SVG could not, which is what the old two-file
+   light/dark logo swap existed to work around.) */

@@ -5,7 +5,7 @@ A Pinterest-first, ad-supported **home-decor micro-niche blog** built on WordPre
 ## Repository layout
 - `saad-site/` — the WordPress install, including the custom theme at `wp-content/themes/moodboard/`
 - `PROJECT.md` — living project spec + build status
-- `WORK-LOG-2026-07-26.md` — dated log of work completed
+- `WORK-LOG-*.md` — dated logs of work completed (most recent: `WORK-LOG-2026-07-27.md`)
 - `backups/` — plugin manifest (database dumps are gitignored — kept private)
 - `logo-stacked.svg` — brand logo
 

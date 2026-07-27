@@ -163,6 +163,7 @@ Done:
 - [x] Step 5 — About, Contact, Privacy Policy pages (Privacy designated in WP settings).
 - [x] Step 6 — Ad-slot placeholder blocks: `moodboard/ad-banner` (below hero) + `moodboard/ad-slot` (below post). Reserved fixed heights to avoid CLS. Insert real code once a network is approved.
 - [x] Navigation: primary (Home · Ideas ▾ · About · Contact) + footer nav.
+- [x] Brand lockup, horizontal (2026-07-27): mark beside wordmark rather than stacked above it. Wordmark went 12px → 24px **and** the header shrank 120px → 70px, which matters now that it is sticky. The mark is inlined SVG (`currentColor` + colour presets) and the wordmark is real text in Space Grotesk — so it is crisp at any size, adapts to both themes with no second asset, and is selectable. Previously an `<img>`-referenced SVG, which is an isolated document: it could not reach the page's `@font-face` rules (the wordmark was silently falling back to Arial, not the brand font) or its custom properties. One knob, `--md-mark-h`, scales the whole lockup; the wordmark's rule is positioned from it so both rules stay on one line. Three size bands keep the header a single row from 360px up — 600–700px is tightest, where core has swapped back to the full nav but the nav still needs ~640px.
 - [x] Demo content: 8 posts across 4 niche categories with placeholder featured images.
 
 Credibility & publication layer (added 2026-07-26):
@@ -187,7 +188,7 @@ Dark mode (added 2026-07-27):
 - [x] No flash of light on load — a tiny inline script in `wp_head` (`moodboard_theme_no_flash_script`) applies the stored choice before first paint.
 - [x] Implemented by re-pointing the `--wp--preset--color--*` variables in `assets/css/dark.css`, so theme.json presets, block markup and `main.css` all follow from one place. dark.css contains no layout or component rules — if it fails to load the site is exactly as it was.
 - [x] Dark palette is warm charcoal, not neutral grey; terracotta and forest are lifted (`#D9643A`→`#E4764C`, `#3F5D42`→`#86A98A`) because the originals were chosen against warm plaster. Every text pairing verified at WCAG AA or better (lowest is 5.3:1).
-- [x] The logo has charcoal baked into the SVG, so a dark variant (`logo-stacked-dark.svg`) is swapped in by CSS. Both variants ship in the markup and CSS shows one — no flash, no JS.
+- [x] The brand lockup needs no dark asset: its mark is an inlined SVG painting with `currentColor` and the colour presets, so it follows the theme on its own. (It briefly shipped as a second `logo-stacked-dark.svg` swapped by CSS; the horizontal lockup below made that unnecessary and the file was removed.)
 - [x] The footer stays a dark band in both themes (it is painted with the very presets dark mode flips, so its colours are pinned to their own tokens).
 
 Needs the user / real assets:

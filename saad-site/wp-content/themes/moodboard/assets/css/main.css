@@ -39,11 +39,6 @@
 	   no conditional CSS of its own — and no flash before JS runs. */
 	--md-icon-sun: none;
 	--md-icon-moon: inline-flex;
-
-	/* Which logo variant is showing — the mark has baked-in charcoal ink, so
-	   dark mode swaps the file rather than filtering it. */
-	--md-logo-light: block;
-	--md-logo-dark: none;
 }
 
 /* ---------------------------------------------------------------------------
@@ -88,17 +83,72 @@ html {
 	-webkit-backdrop-filter: saturate(1.1) blur(8px);
 	backdrop-filter: saturate(1.1) blur(8px);
 }
+/* Brand lockup — mark beside wordmark. Both halves take their colour from
+   the theme presets (the mark via currentColor and var() inside the inlined
+   SVG), so dark mode needs no second asset and no swapping. */
 .brand-logo {
 	margin: 0;
 }
-.brand-logo img {
-	display: block;
-	height: auto;
+.brand-logo__link {
+	/* One knob for the whole lockup: the mark's height. The wordmark's rule
+	   is positioned from it below, so the two halves stay locked together at
+	   any size — change this alone to rescale the logo. */
+	--md-mark-h: 2.35rem;
+
+	display: inline-flex;
+	/* Bottom-aligned, so the mark's rule and the wordmark's rule sit on a
+	   common baseline rather than drifting apart as either one resizes. */
+	align-items: flex-end;
+	gap: 0.55rem;
+	text-decoration: none;
+	color: var(--wp--preset--color--ink);
 }
-/* Qualified with `img` to outrank the `.brand-logo img { display: block }`
-   above — otherwise both variants paint and the marks stack. */
-.brand-logo img.brand-logo__img--light { display: var(--md-logo-light); }
-.brand-logo img.brand-logo__img--dark { display: var(--md-logo-dark); }
+.brand-logo__mark {
+	flex: 0 0 auto;
+	display: block;
+	height: var(--md-mark-h);
+	width: auto;
+}
+.brand-logo__word {
+	font-family: var(--wp--preset--font-family--display);
+	font-weight: 700;
+	font-size: 1.5rem;
+	line-height: 1;
+	letter-spacing: -0.02em;
+	white-space: nowrap;
+	/* The forest rule that sits under the wordmark in the brand mark.
+	   Inside the SVG that rule is drawn 8 units up from the bottom of a
+	   112-unit viewBox, so lifting this one by the same fraction of the
+	   mark's height (less half its own 2px weight) puts both on one line. */
+	border-bottom: 2px solid var(--wp--preset--color--forest);
+	padding-bottom: 0.16em;
+	margin-bottom: calc(var(--md-mark-h) * (8 / 112) - 1px);
+}
+.brand-logo__word-accent {
+	color: var(--wp--preset--color--accent);
+}
+.brand-logo__link:hover .brand-logo__word {
+	border-bottom-color: var(--wp--preset--color--accent);
+}
+
+/* Keep the lockup from crowding the nav on small screens. Only the two sizes
+   change in each band; the rule alignment recalculates from --md-mark-h by
+   itself.
+
+   The awkward band is 600-700px: WordPress swaps its overlay menu back for
+   the full nav at exactly 600px, but the full nav needs roughly 640px of
+   room, so the lockup has to give way hardest there or the header wraps to
+   two rows. These bounds deliberately meet core's 599/600 boundary exactly —
+   an off-by-one here leaves a single width that wraps. Below 600px the
+   hamburger frees the space up again and the logo can breathe. */
+@media (min-width: 600px) and (max-width: 700px) {
+	.brand-logo__link { --md-mark-h: 1.75rem; }
+	.brand-logo__word { font-size: 1.05rem; }
+}
+@media (max-width: 599px) {
+	.brand-logo__link { --md-mark-h: 1.95rem; }
+	.brand-logo__word { font-size: 1.2rem; }
+}
 
 /* Navigation */
 .site-nav {
