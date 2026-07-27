@@ -157,7 +157,7 @@ Ads must not overlap the moodboard grid cards or break masonry layout — reserv
 
 Done:
 - [x] Step 1 — Block theme scaffold: `theme.json` with the (logo-matched) palette, Space Grotesk + Lora self-hosted fonts, spacing scale.
-- [x] Step 2 — Homepage: sticky header + navbar, hero band, ad banner, moodboard masonry grid, footer.
+- [x] Step 2 — Homepage: sticky header + navbar, hero band, ad banner, moodboard masonry grid, footer. (The stick sits on WordPress's template-part wrapper, not on `.site-header`. The wrapper is exactly as tall as the header, and a sticky child can only travel inside its parent's box — so styling `.site-header` alone made it stick for zero pixels and scroll away. Fixed 2026-07-27; verified on 5 templates × 5 widths.)
 - [x] Step 3 — Single post template (niche tag, title, dek, meta + "Save this idea", capped hero image, in-content-ready, related grid).
 - [x] Step 4 — Micro-niche archive template (reuses the moodboard loop) + search + 404 + page templates.
 - [x] Step 5 — About, Contact, Privacy Policy pages (Privacy designated in WP settings).
@@ -175,7 +175,11 @@ Credibility & publication layer (added 2026-07-26):
 
 Ad slots & Saved feature (added 2026-07-26):
 - [x] Multiple ad placeholder slots: Home ×2 (below hero, below grid), Single ×3 (top-of-content, below content, below related), Archive ×1 (above grid), Page/Search ×1. Reserved heights = no CLS. Ad Inserter handles automatic in-content (after 2nd H2) site-wide.
-- [x] Site-wide left + right sticky skyscraper rails (160x600) — injected globally via `wp_footer` (`moodboard_ad_rails()` in functions.php), so they appear on EVERY page incl. 404. CSS shows them only ≥1560px viewport (room in the gutters beside the 1200px column; hidden below to avoid overlap). Fixed position = no CLS.
+- [x] Site-wide left + right sticky skyscraper rails (160x600) — injected globally via `wp_footer` (`moodboard_ad_rails()` in functions.php), so they appear on EVERY page incl. 404. Each rail is centred in the gutter beside the content column rather than pinned to the viewport edge, so clearance grows with the screen and can never creep over the text. Two standard IAB widths, since ad markup is a fixed size: 120x600 from ≥1200px, stepping up to 160x600 from ≥1620px. Fixed position = no CLS.
+
+To make that possible on ordinary laptops, the **wide column caps at `min(1200px, 100vw - 320px)`** — a single override of WordPress's `--wp--style--global--wide-size`, which drives every alignwide block. From 1520px up it changes nothing; below that the column gives back exactly the width the rails need (e.g. 960px at a 1280px viewport) and no more. The 720px reading column is untouched at every width, so body copy never narrows — only alignwide blocks (chiefly the banner ad slot, which still clears a 728x90 at the narrowest setting). Verified 1152→2560px on home and single: clearance never below 20px, no overlap, no horizontal scroll.
+
+(Previously ≥1560px with a 160px unit pinned at left:24px. That missed every laptop below 1560px — including the very common 1536px and 1366px viewports — which is why the rails only appeared when the page was zoomed out; and at exactly 1560px the rail overlapped the column by 4px.)
 - [x] "Saved" bookmarks — client-side (localStorage, key `homeiliora_saved_v1`, no account). Nav "♥ Saved" tab with live count badge; "+ Save / ✓ Saved" button on every card; "Save this idea" toggle on posts; `/saved/` page (id 42) that lists saved items as moodboard cards with Remove. JS: `assets/js/bookmarks.js`. Disambiguated from the Pinterest "Pin it" hover button.
 
 Dark mode (added 2026-07-27):

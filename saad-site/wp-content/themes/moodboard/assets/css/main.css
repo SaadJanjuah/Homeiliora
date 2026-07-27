@@ -30,6 +30,11 @@
 	--md-footer-nav: #DAD5C9;
 	--md-footer-meta: #C4A998;
 
+	/* Mirrors theme.json's layout.wideSize. Kept as a token because the ad
+	   rails have to know where the content column ends, and because the rule
+	   below narrows it on screens too tight to hold rails otherwise. */
+	--md-col-w: 1200px;
+
 	/* Which theme-toggle icon is showing. Driven from here so the button has
 	   no conditional CSS of its own — and no flash before JS runs. */
 	--md-icon-sun: none;
@@ -55,11 +60,29 @@ body {
 
 /* ---------------------------------------------------------------------------
    Header — sticky, translucent, hairline base
+
+   The stick has to sit on WordPress's template-part wrapper, not on
+   .site-header itself. WordPress wraps every template part in its own
+   element, and that wrapper is exactly as tall as the header — a sticky
+   child can only travel within its parent's box, so with no spare height it
+   stuck for zero pixels and scrolled away with the page. The wrapper's own
+   parent is .wp-site-blocks (the full document), which gives it the whole
+   page to travel. The footer part is wrapped in <footer>, so tying this to
+   the header tag keeps it off everything else.
 --------------------------------------------------------------------------- */
-.site-header {
+header.wp-block-template-part {
 	position: sticky;
 	top: 0;
 	z-index: 100;
+}
+
+/* Keep in-page anchors clear of the now-permanent header instead of landing
+   underneath it. */
+html {
+	scroll-padding-top: 8rem;
+}
+
+.site-header {
 	border-bottom: 1px solid var(--wp--preset--color--stone);
 	background-color: var(--md-header-veil);
 	-webkit-backdrop-filter: saturate(1.1) blur(8px);
@@ -599,32 +622,77 @@ body {
 	min-height: 120px;              /* leaderboard-ish */
 }
 
-/* Sticky left/right skyscraper rails — global, every page. Hidden by default;
-   only shown when the viewport is wide enough to fit a 160px unit in each
-   gutter beside the 1200px content column (1200 + 2*160 + gaps ≈ 1560px). */
+/* Sticky left/right skyscraper rails — global, every page.
+
+   Each rail is centred in the gutter beside the 1200px content column rather
+   than pinned a fixed distance from the viewport edge, so the clearance grows
+   with the screen and the rail can never creep over the text. (Pinned at
+   left:24px with a 160px unit, a 1560px viewport left a 180px gutter and the
+   rail overlapped the column by 4px — the old breakpoint was a hair too low
+   for the size it was showing.)
+
+   Two standard IAB widths, because ad markup is a fixed size and cannot be
+   fluid: a 120x600 skyscraper down to 1200px, stepping up to 160x600 once the
+   gutter is comfortable. Below 1200px the screen is narrow enough that the
+   in-flow slots should carry the page on their own. */
+/* Reserve a gutter wide enough for a rail by capping the content column.
+   theme.json asks for 1200px, which on a 1280–1500px laptop leaves nothing
+   either side — the reason the rails only appeared when the page was zoomed
+   out. `min()` means this costs nothing from 1520px up, where a full 1200px
+   column already leaves room; below that the column gives back exactly as
+   much as the rails need and no more. Only alignwide blocks are affected;
+   the 720px reading column is untouched at every width.
+
+   WordPress drives every alignwide block from this one custom property
+   (`.is-layout-constrained > .alignwide { max-width: … }`), so overriding it
+   here is enough — no per-block rules and no template changes. */
+@media (min-width: 1200px) {
+	:root {
+		--md-col-w: min(1200px, calc(100vw - 320px));
+		--wp--style--global--wide-size: var(--md-col-w);
+	}
+}
+
 .ad-rail { display: none; }
-@media (min-width: 1560px) {
+@media (min-width: 1200px) {
 	.ad-rail {
 		display: block;
 		position: fixed;
 		top: 50%;
 		transform: translateY(-50%);
 		z-index: 50;
-		width: 160px;
+
+		--md-rail-w: 120px;                             /* 120x600 skyscraper */
+		/* Half the gutter, less half the rail = centred in the gutter. */
+		--md-rail-inset: calc((100vw - var(--md-col-w)) / 4 - var(--md-rail-w) / 2);
+
+		width: var(--md-rail-w);
 	}
-	.ad-rail--left { left: 24px; }
-	.ad-rail--right { right: 24px; }
+	.ad-rail--left { left: var(--md-rail-inset); }
+	.ad-rail--right { right: var(--md-rail-inset); }
 	.ad-rail .ad-slot--rail {
-		width: 160px;
-		min-height: 600px;          /* 160x600 wide skyscraper */
+		width: var(--md-rail-w);
+		min-height: 600px;
 		margin: 0;
 		flex-direction: column;
 	}
+	/* "ADVERTISEMENT" at the default size and tracking is ~121px wide, which
+	   spills out of a 120px rail. Tightened just enough to sit inside the
+	   narrow unit, and left at that size for the wide one so the two rails
+	   look like the same component. */
+	.ad-rail .ad-slot--rail .ad-slot__label {
+		font-size: 0.6875rem;
+		letter-spacing: 0.08em;
+		text-align: center;
+	}
 }
-/* On very wide screens, give the rails a touch more breathing room. */
-@media (min-width: 1800px) {
-	.ad-rail--left { left: 40px; }
-	.ad-rail--right { right: 40px; }
+/* Once the gutter can hold it comfortably, step up to the wide skyscraper.
+   The inset recalculates from --md-rail-w on its own, so the rails stay
+   centred in the gutter and no position needs restating here. */
+@media (min-width: 1620px) {
+	.ad-rail {
+		--md-rail-w: 160px;             /* 160x600 wide skyscraper */
+	}
 }
 .ad-slot__label {
 	margin: 0;
