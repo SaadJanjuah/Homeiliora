@@ -37,4 +37,16 @@ Apache uses `dev/apache-homeiliora.conf` rather than Laragon's own configuration
 
 Paths are absolute. If Laragon updates its bundled Apache, PHP or MySQL, correct the version numbers in the three `Define` lines at the top of the config and in the two `$mysqld` / `$httpd` variables in `start-local.ps1`.
 
+### Building an installable theme zip
+
+```powershell
+powershell -ExecutionPolicy Bypass -File dev\build-theme-zip.ps1   # -> moodboard-theme.zip
+```
+
+Produces `moodboard-theme.zip` in the project root, ready for **Appearance → Themes → Add New → Upload Theme**. Rebuild it after any theme change — the zip is gitignored precisely because a committed copy goes stale.
+
+It deliberately does not use `Compress-Archive`: on Windows PowerShell 5.1 that writes entry paths with backslashes, which the ZIP spec forbids and WordPress's unzip mishandles. The script writes entries explicitly and verifies the result before finishing.
+
+> A theme zip carries the **design only**. Moving the whole site to a server also needs the database (posts, pages, menus, settings), `wp-content/uploads`, and the plugin set — use a migration plugin such as Duplicator for that, not this zip.
+
 > Not committed to this repo (by design): `wp-config.php` (secrets) and `backups/*.sql` (database dumps contain a password hash).

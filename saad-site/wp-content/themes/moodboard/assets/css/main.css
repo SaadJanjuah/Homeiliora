@@ -80,9 +80,17 @@ html {
 .site-header {
 	border-bottom: 1px solid var(--wp--preset--color--stone);
 	background-color: var(--md-header-veil);
-	-webkit-backdrop-filter: saturate(1.1) blur(8px);
-	backdrop-filter: saturate(1.1) blur(8px);
 }
+
+/* No backdrop-filter here, deliberately.
+   An element with backdrop-filter becomes the containing block for any
+   position:fixed descendant — and WordPress's mobile menu is a fixed,
+   full-screen overlay rendered inside the header. With the filter set, the
+   menu was confined to the header's own ~68px box: a sliver at the top of
+   the screen with all but the first link unreachable.
+   Nothing is lost visually: the header's block markup carries
+   has-base-background-color, whose !important opaque background painted
+   over the frosted effect anyway, so it never actually rendered. */
 /* Brand lockup — mark beside wordmark. Both halves take their colour from
    the theme presets (the mark via currentColor and var() inside the inlined
    SVG), so dark mode needs no second asset and no swapping. */
@@ -192,6 +200,73 @@ html {
 	background: var(--wp--preset--color--base);
 }
 .site-nav .wp-block-navigation__submenu-container .wp-block-navigation-item a::after {
+	display: none;
+}
+
+/* Mobile overlay menu.
+   Everything above styles the nav as a right-aligned horizontal bar. In the
+   full-screen overlay that same alignment pushes every label against — and
+   past — the right edge, and the submenu keeps rendering as a floating
+   desktop dropdown. This block restates the nav as a plain left-aligned
+   column for the overlay only. It went unnoticed until now because the
+   overlay never actually opened to full size (see the backdrop-filter note
+   above), so its styling was never exercised. */
+.wp-block-navigation__responsive-container.is-menu-open {
+	/* Core positions the overlay's items from these custom properties. The nav
+	   element sets them to flex-end for the right-aligned desktop bar and they
+	   inherit into the overlay, which is what pinned every label to the right
+	   edge. Re-pointing the variables here beats fighting core's selectors:
+	   its own rules then compute to flex-start on their own. */
+	--navigation-layout-justification-setting: flex-start;
+	--navigation-layout-align: flex-start;
+	--navigation-layout-justify: flex-start;
+}
+
+/* Core hard-codes #fff / #000 for an overlay whose nav block declares no
+   colours of its own, and does it at a specificity no plain class can beat —
+   so the overlay ignored the theme and turned white with black text in dark
+   mode too. Matching core's own selector shape is what makes these apply. */
+.site-nav.wp-block-navigation:not(.has-background) .wp-block-navigation__responsive-container.is-menu-open:not(.disable-default-overlay) {
+	background-color: var(--wp--preset--color--base);
+	padding: var(--wp--preset--spacing--60) var(--wp--preset--spacing--40);
+}
+.site-nav.wp-block-navigation:not(.has-text-color) .wp-block-navigation__responsive-container.is-menu-open:not(.disable-default-overlay) {
+	color: var(--wp--preset--color--ink);
+}
+/* The variables have to be restated on the list itself, not just an ancestor:
+   WordPress emits a generated layout class onto the <ul> that re-sets them to
+   flex-end (and align to center) for the desktop bar, so an inherited value
+   never reaches it. */
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content,
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container,
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-container {
+	--navigation-layout-justification-setting: flex-start;
+	--navigation-layout-align: flex-start;
+	--navigation-layout-justify: flex-start;
+
+	align-items: flex-start;
+	justify-content: flex-start;
+	width: 100%;
+}
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item {
+	width: 100%;
+}
+.wp-block-navigation__responsive-container.is-menu-open a {
+	padding-block: 0.35rem;
+}
+/* The submenu is a nested list here, not a floating card. */
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-container {
+	background: transparent;
+	border: 0;
+	box-shadow: none;
+	min-width: 0;
+	padding: 0 0 0 var(--wp--preset--spacing--40);
+}
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-container a {
+	color: var(--wp--preset--color--muted);
+}
+/* The desktop hover underline reads as a stray dash in a vertical list. */
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item > a::after {
 	display: none;
 }
 

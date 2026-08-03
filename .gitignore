@@ -31,6 +31,10 @@ saad-site/.htaccess
 dev/logs/
 *.pid
 
+# Theme zip is a build artifact — rebuild it with dev/build-theme-zip.ps1
+# rather than committing a copy that goes stale the next time the theme changes.
+moodboard-theme.zip
+
 # Dependencies / build junk
 node_modules/
 vendor/
