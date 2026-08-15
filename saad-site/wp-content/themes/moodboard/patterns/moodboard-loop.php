@@ -8,8 +8,8 @@
  * Block Types: core/query
  */
 ?>
-<!-- wp:query {"queryId":0,"query":{"perPage":12,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","inherit":true},"className":"moodboard-query","layout":{"type":"default"}} -->
-<div class="wp-block-query moodboard-query"><!-- wp:post-template {"className":"moodboard-grid","layout":{"type":"default"}} -->
+<!-- wp:query {"queryId":0,"query":{"perPage":12,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","inherit":true},"className":"moodboard-query","layout":{"type":"default"},"anchor":"ideas"} -->
+<div id="ideas" class="wp-block-query moodboard-query"><!-- wp:post-template {"className":"moodboard-grid","layout":{"type":"default"}} -->
 <!-- wp:group {"className":"moodboard-card","style":{"spacing":{"blockGap":"0"}},"backgroundColor":"surface","layout":{"type":"constrained"}} -->
 <div class="wp-block-group moodboard-card has-surface-background-color has-background"><!-- wp:post-featured-image {"isLink":true,"className":"moodboard-card__image"} /-->
 

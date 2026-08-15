@@ -18,12 +18,22 @@
 	--md-shadow-rgb: 38, 36, 31;
 
 	--md-header-veil: rgba(246, 244, 240, 0.85); /* translucent sticky header */
-	/* Hero photographs: dark wash + light type, in BOTH themes — see the
-	   .home-hero__backdrop::after note for why a pale scrim cannot work. */
-	--md-hero-scrim: rgba(24, 23, 20, 0.72);
-	--md-hero-text: #F4F1EB;
-	--md-hero-eyebrow: #CFDDC8;                  /* pale sage, keeps the accent */
-	--md-hero-dek: #DED9D0;
+	/* Hero photographs: gradient scrim + light type, in BOTH themes. Dense on
+	   the left where the text sits, clearing to the right so the room stays
+	   sharp. See the .home-hero__backdrop::after note. */
+	--md-hero-scrim: linear-gradient(
+		90deg,
+		rgba(22, 21, 18, 0.94) 0%,
+		rgba(22, 21, 18, 0.91) 34%,
+		rgba(22, 21, 18, 0.76) 52%,
+		rgba(22, 21, 18, 0.30) 74%,
+		rgba(22, 21, 18, 0.10) 100%
+	);
+	--md-hero-text: #FFFFFF;
+	--md-hero-accent: #E4764C;                   /* terracotta, lifted for dark */
+	--md-hero-eyebrow: #DDE8D8;                  /* pale sage, keeps the accent */
+	--md-hero-dek: #E6E1D8;
+	--md-hero-min-h: 26rem;
 	--md-savebtn-bg: rgba(255, 255, 255, 0.92);  /* save pill on a photo     */
 	--md-fill-faint: rgba(218, 213, 201, 0.28);  /* ad-slot placeholder      */
 	--md-fill-fainter: rgba(218, 213, 201, 0.2); /* empty-state panel        */
@@ -308,6 +318,10 @@ html {
 	position: relative;
 	isolation: isolate;
 	overflow: hidden;
+	min-height: var(--md-hero-min-h);
+	display: flex;
+	align-items: center;
+	border-radius: 4px;
 }
 /* The hero is a constrained layout, and WordPress caps every direct child at
    contentSize (720px) and centres it. That applies to absolutely-positioned
@@ -342,19 +356,13 @@ html {
 	50%, 92% { opacity: 1; }
 	100%     { opacity: 0; }
 }
-/* The scrim that buys back the contrast — deliberately a DARK wash in both
-   themes, with light type over it.
+/* The scrim is a HORIZONTAL gradient, not a flat wash.
 
-   The obvious alternative, a pale scrim keeping the normal ink-on-plaster
-   type, does not survive measurement: the eyebrow is sage and the dek is
-   muted, and both need a background nearly as bright as plaster to clear
-   4.5:1. Scrimming that hard leaves the photographs invisible, which defeats
-   the point of having them. A dark wash inverts the problem — light text
-   only needs the brightest pixel held below ~104, which a 0.72 wash does
-   while still letting roughly a third of the image through.
-
-   So the hero reads as a dark photographic band in light mode too. There is
-   precedent: the footer is already a dark band in both themes. */
+   A uniform wash strong enough to carry light type flattens the whole
+   photograph — the room stops reading as a room. Weighting it to the left,
+   where the type sits, and letting it clear toward the right keeps the
+   furniture sharp while still giving the text a dark ground to sit on.
+   Values were set from pixel sampling behind the text, not by eye. */
 .home-hero__backdrop::after {
 	content: "";
 	position: absolute;
@@ -362,23 +370,90 @@ html {
 	background: var(--md-hero-scrim);
 }
 
-/* Hero type is pinned light, overriding the preset colour classes the block
-   markup carries (which are !important, hence the same here). */
-.home-hero h1,
-.home-hero .home-hero__eyebrow.has-accent-color,
-.home-hero p.has-muted-color {
-	color: var(--md-hero-text) !important;
+/* Type block — left-aligned over the dense end of the gradient. */
+.home-hero > .home-hero__content {
+	max-width: 33rem;
+	/* !important because the constrained layout centres every child with
+	   `margin-left/right: auto !important`. Without beating that, the text
+	   block sits in the middle of the band — straight over the bright side
+	   of the photograph, which is exactly what the gradient is avoiding. */
+	margin-left: 0 !important;
+	margin-right: auto !important;
+	text-align: left;
+	padding-block: var(--wp--preset--spacing--60);
+	/* Inset from the band edge. The section's own global padding does not
+	   survive the flex context, so the breathing room is set here. */
+	padding-inline-start: clamp(1.5rem, 4.5vw, 4rem);
+	padding-inline-end: var(--wp--preset--spacing--40);
+	box-sizing: content-box;
 }
-.home-hero .home-hero__eyebrow.has-accent-color {
+.home-hero__eyebrow.has-accent-color {
 	color: var(--md-hero-eyebrow) !important;
+	margin: 0;
 }
-.home-hero p.has-muted-color {
+.home-hero__title {
+	/* Space Grotesk here, not the editorial Playfair used for post titles.
+	   The hero is a poster, not an article opening, and the reference this
+	   was built to leads with a geometric sans. Deliberate narrow exception
+	   to the type split in spec 2.2. */
+	font-family: var(--wp--preset--font-family--display) !important;
+	font-size: clamp(2.4rem, 4.6vw, 4rem);
+	line-height: 1.04;
+	letter-spacing: -0.02em;
+	font-weight: 500;
+	color: var(--md-hero-text) !important;
+	margin: 0.5rem 0 0;
+}
+.home-hero__title-accent {
+	color: var(--md-hero-accent);
+	font-weight: 700;
+}
+.home-hero__dek {
+	font-family: var(--wp--preset--font-family--display);
+	font-size: clamp(0.95rem, 1.15vw, 1.0625rem);
+	line-height: 1.6;
 	color: var(--md-hero-dek) !important;
+	max-width: 30rem;
+	margin: var(--wp--preset--spacing--30) 0 0;
+}
+.home-hero__cta {
+	margin-top: var(--wp--preset--spacing--40);
+}
+.home-hero__cta .wp-block-button__link {
+	background-color: var(--wp--preset--color--terracotta-deep);
+	color: #FFFFFF;
+	padding: 0.85rem 1.6rem;
+	font-size: var(--wp--preset--font-size--small);
+}
+.home-hero__cta .wp-block-button__link:hover,
+.home-hero__cta .wp-block-button__link:focus {
+	background-color: var(--wp--preset--color--terracotta);
+	color: #FFFFFF;
 }
 /* Everything except the backdrop rides above it. */
 .home-hero > *:not(.home-hero__backdrop) {
 	position: relative;
 	z-index: 1;
+}
+
+/* Narrow screens: there is no room for a text column beside the photograph,
+   so the gradient goes vertical and the type spans the width. */
+@media (max-width: 780px) {
+	.home-hero {
+		--md-hero-scrim: linear-gradient(
+			180deg,
+			rgba(22, 21, 18, 0.72) 0%,
+			rgba(22, 21, 18, 0.86) 55%,
+			rgba(22, 21, 18, 0.94) 100%
+		);
+		--md-hero-min-h: 22rem;
+	}
+	.home-hero > .home-hero__content {
+		max-width: none;
+	}
+	.home-hero__slide {
+		object-position: center 45%;
+	}
 }
 
 @media (prefers-reduced-motion: reduce) {
