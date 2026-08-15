@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- homeiliora: Home Decor + Styles category trees only. No posts. -->
+<!-- Import with Tools > Import > WordPress. Safe to run twice: the -->
+<!-- importer skips categories whose slug already exists.           -->
+<rss version="2.0"
+	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:wp="http://wordpress.org/export/1.2/">
+<channel>
+	<title>homeiliora — nav categories</title>
+	<link>http://localhost:8080</link>
+	<description>Home Decor and Styles category trees</description>
+	<language>en-US</language>
+	<wp:wxr_version>1.2</wp:wxr_version>
+	<wp:base_site_url>http://localhost:8080</wp:base_site_url>
+	<wp:base_blog_url>http://localhost:8080</wp:base_blog_url>
+	<wp:category>
+		<wp:term_id>6</wp:term_id>
+		<wp:category_nicename>home-decor</wp:category_nicename>
+		<wp:category_parent></wp:category_parent>
+		<wp:cat_name><![CDATA[Home Decor]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>7</wp:term_id>
+		<wp:category_nicename>bathroom</wp:category_nicename>
+		<wp:category_parent>home-decor</wp:category_parent>
+		<wp:cat_name><![CDATA[Bathroom]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>8</wp:term_id>
+		<wp:category_nicename>bedroom</wp:category_nicename>
+		<wp:category_parent>home-decor</wp:category_parent>
+		<wp:cat_name><![CDATA[Bedroom]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>9</wp:term_id>
+		<wp:category_nicename>dining-room</wp:category_nicename>
+		<wp:category_parent>home-decor</wp:category_parent>
+		<wp:cat_name><![CDATA[Dining Room]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>10</wp:term_id>
+		<wp:category_nicename>entryway</wp:category_nicename>
+		<wp:category_parent>home-decor</wp:category_parent>
+		<wp:cat_name><![CDATA[Entryway]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>11</wp:term_id>
+		<wp:category_nicename>garage</wp:category_nicename>
+		<wp:category_parent>home-decor</wp:category_parent>
+		<wp:cat_name><![CDATA[Garage]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>12</wp:term_id>
+		<wp:category_nicename>hallway</wp:category_nicename>
+		<wp:category_parent>home-decor</wp:category_parent>
+		<wp:cat_name><![CDATA[Hallway]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>13</wp:term_id>
+		<wp:category_nicename>home-office</wp:category_nicename>
+		<wp:category_parent>home-decor</wp:category_parent>
+		<wp:cat_name><![CDATA[Home Office]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>14</wp:term_id>
+		<wp:category_nicename>kids-room</wp:category_nicename>
+		<wp:category_parent>home-decor</wp:category_parent>
+		<wp:cat_name><![CDATA[Kids’ Room]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>15</wp:term_id>
+		<wp:category_nicename>kitchen</wp:category_nicename>
+		<wp:category_parent>home-decor</wp:category_parent>
+		<wp:cat_name><![CDATA[Kitchen]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>16</wp:term_id>
+		<wp:category_nicename>living-room</wp:category_nicename>
+		<wp:category_parent>home-decor</wp:category_parent>
+		<wp:cat_name><![CDATA[Living Room]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>17</wp:term_id>
+		<wp:category_nicename>mudroom-laundry</wp:category_nicename>
+		<wp:category_parent>home-decor</wp:category_parent>
+		<wp:cat_name><![CDATA[Mudroom &amp; Laundry]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>18</wp:term_id>
+		<wp:category_nicename>playroom</wp:category_nicename>
+		<wp:category_parent>home-decor</wp:category_parent>
+		<wp:cat_name><![CDATA[Playroom]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>19</wp:term_id>
+		<wp:category_nicename>styles</wp:category_nicename>
+		<wp:category_parent></wp:category_parent>
+		<wp:cat_name><![CDATA[Styles]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>20</wp:term_id>
+		<wp:category_nicename>coastal</wp:category_nicename>
+		<wp:category_parent>styles</wp:category_parent>
+		<wp:cat_name><![CDATA[Coastal]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>21</wp:term_id>
+		<wp:category_nicename>cottage</wp:category_nicename>
+		<wp:category_parent>styles</wp:category_parent>
+		<wp:cat_name><![CDATA[Cottage]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>22</wp:term_id>
+		<wp:category_nicename>farmhouse</wp:category_nicename>
+		<wp:category_parent>styles</wp:category_parent>
+		<wp:cat_name><![CDATA[Farmhouse]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>23</wp:term_id>
+		<wp:category_nicename>french-country</wp:category_nicename>
+		<wp:category_parent>styles</wp:category_parent>
+		<wp:cat_name><![CDATA[French Country]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>24</wp:term_id>
+		<wp:category_nicename>mid-century</wp:category_nicename>
+		<wp:category_parent>styles</wp:category_parent>
+		<wp:cat_name><![CDATA[Mid Century]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>25</wp:term_id>
+		<wp:category_nicename>modern</wp:category_nicename>
+		<wp:category_parent>styles</wp:category_parent>
+		<wp:cat_name><![CDATA[Modern]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>26</wp:term_id>
+		<wp:category_nicename>rustic</wp:category_nicename>
+		<wp:category_parent>styles</wp:category_parent>
+		<wp:cat_name><![CDATA[Rustic]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>27</wp:term_id>
+		<wp:category_nicename>spanish-revival</wp:category_nicename>
+		<wp:category_parent>styles</wp:category_parent>
+		<wp:cat_name><![CDATA[Spanish Revival]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>28</wp:term_id>
+		<wp:category_nicename>traditional</wp:category_nicename>
+		<wp:category_parent>styles</wp:category_parent>
+		<wp:cat_name><![CDATA[Traditional]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>29</wp:term_id>
+		<wp:category_nicename>transitional</wp:category_nicename>
+		<wp:category_parent>styles</wp:category_parent>
+		<wp:cat_name><![CDATA[Transitional]]></wp:cat_name>
+	</wp:category>
+</channel>
+</rss>

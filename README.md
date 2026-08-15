@@ -60,4 +60,6 @@ wp eval-file dev/create-nav-categories.php
 
 Idempotent — safe to run twice; existing terms are left alone. Not needed if the whole database is migrated.
 
+**No WP-CLI or SSH on the server?** Import `dev/nav-categories.wxr` instead, via **Tools → Import → WordPress**. It contains the same 24 categories and no posts, and the importer skips any slug that already exists. Regenerate it from the live terms with `wp eval-file` on the script that produced it if the trees ever change.
+
 > Not committed to this repo (by design): `wp-config.php` (secrets) and `backups/*.sql` (database dumps contain a password hash).
