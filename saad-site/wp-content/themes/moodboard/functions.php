@@ -70,6 +70,16 @@ function moodboard_enqueue_assets() {
 		true
 	);
 
+	// Keeps the sticky ad rails off the full-bleed hero photograph.
+	$rails = get_theme_file_path( 'assets/js/ad-rails.js' );
+	wp_enqueue_script(
+		'moodboard-ad-rails',
+		get_theme_file_uri( 'assets/js/ad-rails.js' ),
+		array(),
+		file_exists( $rails ) ? (string) filemtime( $rails ) : '0.1.0',
+		true
+	);
+
 	// Client-side bookmarks ("Saved").
 	$bm = get_theme_file_path( 'assets/js/bookmarks.js' );
 	wp_enqueue_script(

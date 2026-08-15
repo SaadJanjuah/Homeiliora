@@ -33,7 +33,7 @@
 	--md-hero-accent: #E4764C;                   /* terracotta, lifted for dark */
 	--md-hero-eyebrow: #DDE8D8;                  /* pale sage, keeps the accent */
 	--md-hero-dek: #E6E1D8;
-	--md-hero-min-h: 26rem;
+	--md-hero-min-h: 29.5rem;                    /* ~4:1 band, as the reference */
 	--md-savebtn-bg: rgba(255, 255, 255, 0.92);  /* save pill on a photo     */
 	--md-fill-faint: rgba(218, 213, 201, 0.28);  /* ad-slot placeholder      */
 	--md-fill-fainter: rgba(218, 213, 201, 0.2); /* empty-state panel        */
@@ -321,7 +321,6 @@ html {
 	min-height: var(--md-hero-min-h);
 	display: flex;
 	align-items: center;
-	border-radius: 4px;
 }
 /* The hero is a constrained layout, and WordPress caps every direct child at
    contentSize (720px) and centres it. That applies to absolutely-positioned
@@ -371,21 +370,28 @@ html {
 }
 
 /* Type block — left-aligned over the dense end of the gradient. */
+/* The band is full-bleed, but the type still lines up with the site's content
+   column rather than drifting to the window edge — so the block is centred
+   and the text is left-aligned inside it. */
 .home-hero > .home-hero__content {
-	max-width: 33rem;
-	/* !important because the constrained layout centres every child with
-	   `margin-left/right: auto !important`. Without beating that, the text
-	   block sits in the middle of the band — straight over the bright side
-	   of the photograph, which is exactly what the gradient is avoiding. */
-	margin-left: 0 !important;
+	width: 100%;
+	max-width: var(--md-col-w);
+	margin-left: auto !important;
 	margin-right: auto !important;
 	text-align: left;
 	padding-block: var(--wp--preset--spacing--60);
-	/* Inset from the band edge. The section's own global padding does not
-	   survive the flex context, so the breathing room is set here. */
-	padding-inline-start: clamp(1.5rem, 4.5vw, 4rem);
-	padding-inline-end: var(--wp--preset--spacing--40);
-	box-sizing: content-box;
+	padding-inline: clamp(1.25rem, 3vw, 2.5rem);
+	box-sizing: border-box;
+}
+/* Keep the lines short even though the block is column-width — and pin them
+   left. The constrained layout centres children with `margin: auto !important`
+   at every level, so without this the capped lines float to the middle of the
+   column and land on the bright side of the photograph. Measured: the text ran
+   30%–70% of the band instead of 15%–55%. */
+.home-hero__content > * {
+	max-width: 34rem;
+	margin-left: 0 !important;
+	margin-right: auto !important;
 }
 .home-hero__eyebrow.has-accent-color {
 	color: var(--md-hero-eyebrow) !important;
@@ -397,12 +403,14 @@ html {
 	   was built to leads with a geometric sans. Deliberate narrow exception
 	   to the type split in spec 2.2. */
 	font-family: var(--wp--preset--font-family--display) !important;
-	font-size: clamp(2.4rem, 4.6vw, 4rem);
-	line-height: 1.04;
+	/* Sized to the reference: ~52px at desktop, not the 64px first tried —
+	   the headline should sit in the band, not fill it. */
+	font-size: clamp(1.9rem, 2.9vw, 3.25rem);
+	line-height: 1.12;
 	letter-spacing: -0.02em;
-	font-weight: 500;
+	font-weight: 400;
 	color: var(--md-hero-text) !important;
-	margin: 0.5rem 0 0;
+	margin: 0.35rem 0 0;
 }
 .home-hero__title-accent {
 	color: var(--md-hero-accent);
@@ -410,20 +418,21 @@ html {
 }
 .home-hero__dek {
 	font-family: var(--wp--preset--font-family--display);
-	font-size: clamp(0.95rem, 1.15vw, 1.0625rem);
-	line-height: 1.6;
+	font-size: clamp(0.875rem, 0.95vw, 0.9375rem);
+	line-height: 1.65;
 	color: var(--md-hero-dek) !important;
-	max-width: 30rem;
-	margin: var(--wp--preset--spacing--30) 0 0;
+	max-width: 27rem;
+	margin: 0.85rem 0 0;
 }
 .home-hero__cta {
-	margin-top: var(--wp--preset--spacing--40);
+	margin-top: 1.5rem;
 }
 .home-hero__cta .wp-block-button__link {
 	background-color: var(--wp--preset--color--terracotta-deep);
 	color: #FFFFFF;
-	padding: 0.85rem 1.6rem;
-	font-size: var(--wp--preset--font-size--small);
+	padding: 0.7rem 1.35rem;
+	font-size: 0.9375rem;
+	border-radius: 3px;
 }
 .home-hero__cta .wp-block-button__link:hover,
 .home-hero__cta .wp-block-button__link:focus {
@@ -991,6 +1000,19 @@ html {
 }
 
 .ad-rail { display: none; }
+
+/* Held back while the full-bleed hero is on screen — see assets/js/ad-rails.js.
+   Not `display:none`, so the fade is smooth and the reserved space never
+   causes a reflow. */
+.ad-rail--behind-hero {
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+.ad-rail {
+	transition: opacity 0.25s ease, visibility 0.25s ease;
+}
 @media (min-width: 1200px) {
 	.ad-rail {
 		display: block;

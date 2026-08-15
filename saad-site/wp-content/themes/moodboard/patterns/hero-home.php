@@ -19,8 +19,8 @@
 
 $moodboard_hero = get_template_directory_uri() . '/assets/images/hero';
 ?>
-<!-- wp:group {"tagName":"section","align":"wide","className":"home-hero","layout":{"type":"constrained"}} -->
-<section class="wp-block-group alignwide home-hero"><!-- wp:html -->
+<!-- wp:group {"tagName":"section","align":"full","className":"home-hero","layout":{"type":"constrained"}} -->
+<section class="wp-block-group alignfull home-hero"><!-- wp:html -->
 <div class="home-hero__backdrop" aria-hidden="true">
 	<img class="home-hero__slide home-hero__slide--a" src="<?php echo esc_url( $moodboard_hero . '/hero-1.jpg' ); ?>" alt="" width="1376" height="768" fetchpriority="high" decoding="async"/>
 	<img class="home-hero__slide home-hero__slide--b" src="<?php echo esc_url( $moodboard_hero . '/hero-2.jpg' ); ?>" alt="" width="1376" height="768" loading="lazy" decoding="async"/>
