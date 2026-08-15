@@ -203,6 +203,23 @@ html {
 	display: none;
 }
 
+/* Hold the overlay menu open-able until the full bar actually fits.
+   Core swaps its hamburger for the horizontal bar at exactly 600px, but with
+   six top-level items — three of them dropdowns — the bar needs about 820px
+   and wrapped to two rows across the whole 600-816px range. These two rules
+   are core's own mobile rules re-asserted over that gap; core gates each of
+   them behind `@media (min-width: 600px)`, so re-stating them here with one
+   extra class of specificity is all it takes. Raise the 819px bound if more
+   top-level items are ever added. */
+@media (min-width: 600px) and (max-width: 819px) {
+	.site-nav .wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
+		display: none;
+	}
+	.site-nav .wp-block-navigation__responsive-container-open:not(.always-shown) {
+		display: flex;
+	}
+}
+
 /* Mobile overlay menu.
    Everything above styles the nav as a right-aligned horizontal bar. In the
    full-screen overlay that same alignment pushes every label against — and
