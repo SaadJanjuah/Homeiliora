@@ -50,7 +50,8 @@ All fonts are self-hosted in `assets/fonts/` — no Google Fonts CDN call, which
 ### 2.3 Layout — "The Moodboard Grid"
 This is the signature element. Homepage and category/archive pages use an **asymmetric masonry grid** (mixed card heights, like a pinboard), NOT a uniform 3-column blog list.
 
-- Subtle hairline grid pattern in the page background (very low opacity, like graph paper) — barely visible texture, not decoration for its own sake.
+- ~~Subtle hairline grid pattern in the page background (very low opacity, like graph paper) — barely visible texture, not decoration for its own sake.~~
+  **Removed 2026-08-15 — deliberate departure from this spec.** It was built as two 1px gradients on `body` at 32px spacing. The light value sat 7/255 from the background and the dark value 11/255, and light-on-dark reads more prominently than dark-on-light at the same distance, so in dark mode it crossed from texture into a visible grid. Offered as soften-or-remove; removal was chosen. The page background is now flat in both themes.
 - Post cards: white surface, no heavy rounded corners (max 4px radius), soft drop shadow on hover only (feels like lifting a pinned photo off a board), image-forward (image takes ~70-80% of card).
 - No numbered markers, no "01/02/03" step decoration anywhere unless content is a genuine sequence (e.g. a real step-by-step DIY tutorial).
 

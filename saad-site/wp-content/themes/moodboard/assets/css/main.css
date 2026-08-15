@@ -17,7 +17,6 @@
 	/* Shadows are tinted with the brand charcoal, not pure black. */
 	--md-shadow-rgb: 38, 36, 31;
 
-	--md-hairline: rgba(38, 36, 31, 0.035);      /* graph-paper grid lines   */
 	--md-header-veil: rgba(246, 244, 240, 0.85); /* translucent sticky header */
 	--md-savebtn-bg: rgba(255, 255, 255, 0.92);  /* save pill on a photo     */
 	--md-fill-faint: rgba(218, 213, 201, 0.28);  /* ad-slot placeholder      */
@@ -42,15 +41,16 @@
 }
 
 /* ---------------------------------------------------------------------------
-   Page texture — a barely-there hairline "graph paper" grid (spec §2.3)
+   Page background — flat.
+
+   Spec §2.3 asked for a barely-there "graph paper" hairline grid here. It was
+   removed on request: in dark mode the lines sat 11/255 from the background
+   against 7/255 in light, so light-on-dark read as a visible grid rather than
+   texture, and a flat ground was preferred over re-tuning it. The spec records
+   this as a deliberate departure.
 --------------------------------------------------------------------------- */
 body {
 	background-color: var(--wp--preset--color--base);
-	background-image:
-		linear-gradient(to right, var(--md-hairline) 1px, transparent 1px),
-		linear-gradient(to bottom, var(--md-hairline) 1px, transparent 1px);
-	background-size: 32px 32px;
-	background-attachment: fixed;
 }
 
 /* ---------------------------------------------------------------------------
