@@ -50,4 +50,14 @@ It deliberately does not use `Compress-Archive`: on Windows PowerShell 5.1 that 
 
 > A theme zip carries the **design only**. Moving the whole site to a server also needs the database (posts, pages, menus, settings), `wp-content/uploads`, and the plugin set — use a migration plugin such as Duplicator for that, not this zip.
 
+### Recreating the nav categories on another install
+
+The header's **Home Decor** and **Styles** dropdowns link to real category archives. Those categories live in the database, so a fresh install that only has the theme will 404 on every one of those links. To create them:
+
+```bash
+wp eval-file dev/create-nav-categories.php
+```
+
+Idempotent — safe to run twice; existing terms are left alone. Not needed if the whole database is migrated.
+
 > Not committed to this repo (by design): `wp-config.php` (secrets) and `backups/*.sql` (database dumps contain a password hash).
