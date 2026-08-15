@@ -34,6 +34,13 @@
 	--md-hero-eyebrow: #DDE8D8;                  /* pale sage, keeps the accent */
 	--md-hero-dek: #E6E1D8;
 	--md-hero-min-h: 29.5rem;                    /* ~4:1 band, as the reference */
+	--md-badge-bg: #F3E4BE;                      /* pale gold, behind the mark */
+	--md-badge-ink: #26241F;                     /* constant in both themes */
+
+	/* Label on the terracotta CTAs. White works on the deep light-mode shade
+	   (5.33:1) but only reaches 3.0:1 on the lifted dark-mode one, so dark
+	   mode flips the label instead of the fill — see dark.css. */
+	--md-cta-fg: #FFFFFF;
 	--md-savebtn-bg: rgba(255, 255, 255, 0.92);  /* save pill on a photo     */
 	--md-fill-faint: rgba(218, 213, 201, 0.28);  /* ad-slot placeholder      */
 	--md-fill-fainter: rgba(218, 213, 201, 0.2); /* empty-state panel        */
@@ -429,7 +436,7 @@ html {
 }
 .home-hero__cta .wp-block-button__link {
 	background-color: var(--wp--preset--color--terracotta-deep);
-	color: #FFFFFF;
+	color: var(--md-cta-fg);
 	padding: 0.7rem 1.35rem;
 	font-size: 0.9375rem;
 	border-radius: 3px;
@@ -437,7 +444,7 @@ html {
 .home-hero__cta .wp-block-button__link:hover,
 .home-hero__cta .wp-block-button__link:focus {
 	background-color: var(--wp--preset--color--terracotta);
-	color: #FFFFFF;
+	color: var(--md-cta-fg);
 }
 /* Everything except the backdrop rides above it. */
 .home-hero > *:not(.home-hero__backdrop) {
@@ -470,6 +477,112 @@ html {
 	.home-hero__slide--b {
 		animation: none;
 		opacity: 0;
+	}
+}
+
+/* ---------------------------------------------------------------------------
+   "Get Inspired" band — full-bleed photograph with a centred card.
+
+   No scrim here, unlike the hero: the type sits on an opaque card, so the
+   room can stay at full strength behind it. That is the whole reason this
+   layout works where a text-on-photo one needed measuring.
+--------------------------------------------------------------------------- */
+.get-inspired {
+	position: relative;
+	isolation: isolate;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 30rem;
+	padding-block: var(--wp--preset--spacing--60);
+	margin-block: var(--wp--preset--spacing--70);
+	overflow: hidden;
+}
+.get-inspired > .get-inspired__photo {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	max-width: none;      /* constrained layout caps children — see .home-hero */
+	margin: 0;
+}
+.get-inspired__photo img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center 55%;
+	display: block;
+}
+.get-inspired > .get-inspired__card {
+	position: relative;
+	z-index: 1;
+	width: min(100%, 42rem);
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--preset--color--stone);
+	/* Softer than the 4px the spec sets for post cards — this is a panel, not
+	   a card in the grid, and the reference it follows is rounded. */
+	border-radius: 10px;
+	padding: var(--wp--preset--spacing--60) var(--wp--preset--spacing--50) var(--wp--preset--spacing--50);
+	box-shadow: 0 24px 60px -30px rgba(var(--md-shadow-rgb), 0.55);
+	text-align: center;
+	margin-inline: auto;
+}
+/* Badge, straddling the top edge of the card. */
+.get-inspired__badge {
+	display: grid;
+	place-items: center;
+	width: 4.5rem;
+	height: 4.5rem;
+	margin: calc(-1 * var(--wp--preset--spacing--60) - 2.6rem) auto var(--wp--preset--spacing--40);
+	border-radius: 50%;
+	background: var(--md-badge-bg);
+	/* Pinned dark, not `ink`: the badge stays pale gold in both themes, and a
+	   flipped ink would put near-white strokes on it in dark mode. */
+	color: var(--md-badge-ink);
+	box-shadow: 0 0 0 0.55rem var(--wp--preset--color--surface);
+}
+.get-inspired__badge svg {
+	width: 2.1rem;
+	height: auto;
+	display: block;
+}
+.get-inspired__title {
+	font-family: var(--wp--preset--font-family--display) !important;
+	font-size: clamp(1.6rem, 2.2vw, 2.1rem);
+	font-weight: 700;
+	line-height: 1.15;
+	margin: 0;
+}
+.get-inspired__text {
+	font-family: var(--wp--preset--font-family--display);
+	font-size: clamp(0.9375rem, 1.05vw, 1rem);
+	line-height: 1.65;
+	color: var(--wp--preset--color--muted);
+	max-width: 30rem;
+	margin: var(--wp--preset--spacing--30) auto 0;
+}
+.get-inspired__cta {
+	margin-top: var(--wp--preset--spacing--40);
+}
+.get-inspired__cta .wp-block-button__link {
+	background-color: var(--wp--preset--color--terracotta-deep);
+	color: var(--md-cta-fg);
+	padding: 0.7rem 1.35rem;
+	font-size: 0.9375rem;
+	border-radius: 3px;
+}
+.get-inspired__cta .wp-block-button__link:hover,
+.get-inspired__cta .wp-block-button__link:focus {
+	background-color: var(--wp--preset--color--terracotta);
+	color: var(--md-cta-fg);
+}
+
+@media (max-width: 600px) {
+	.get-inspired {
+		min-height: 0;
+		padding-inline: var(--wp--preset--spacing--40);
+	}
+	.get-inspired > .get-inspired__card {
+		padding-inline: var(--wp--preset--spacing--40);
 	}
 }
 

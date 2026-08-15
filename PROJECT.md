@@ -329,6 +329,15 @@ Hero photo slider (2026-08-15):
 - [x] The text block needed `margin-left: 0 !important`: the constrained layout centres every child with `margin-left/right: auto !important`, which put the type in the middle of the band, directly over the bright side of the photograph — the one place the gradient does not protect.
 - [x] The backdrop needed `max-width: none`: the hero is a constrained layout and WordPress caps *every* direct child at contentSize, absolutely-positioned ones included, so it rendered as a 720px strip inside a 1046px band.
 
+"Get Inspired" band (2026-08-16):
+- [x] Full-bleed room photograph below the post grid with a centred card — pale-gold badge carrying the brand mark, heading, short pitch, and a **Browse All Ideas** button through to `/category/home-decor/`. Built to a supplied reference; source photo re-encoded 788 KB → 154 KB (80% smaller).
+- [x] **No scrim needed here**, unlike the hero: the type sits on an opaque card, so the room stays at full strength. That is the whole reason this layout works where text-on-photo had to be measured.
+- [x] The ad rails now hide over **both** full-bleed bands, tracked per band so two on screen at once cannot flicker.
+- [x] The badge's mark is pinned dark (`--md-badge-ink`) rather than using `ink`, which would flip near-white on the pale gold in dark mode.
+- [x] **CTA labels are themed** (`--md-cta-fg`): white on the deep light-mode terracotta (5.33:1) but near-black on the lifted dark-mode one, where white only reached **3.0:1**. This affected the hero button too — the pixel sampler had missed it, because it measures text against the *photograph* and a button label sits on its own opaque fill. Label-vs-fill is now checked separately.
+
+> **Gotcha for future pattern work:** WordPress caches the theme's pattern list (`WP_Theme::get_block_patterns`), so a newly added file in `patterns/` renders as nothing at all until that cache expires — it looks exactly like broken markup. `WP_DEVELOPMENT_MODE = 'theme'` in `wp-config.php` disables the cache locally; it is set on the dev install and must **not** be set in production.
+
 Docs (2026-08-15):
 - [x] This file is the merge of two divergent specs. A second copy (`PROJECT (1).md`) carried §2.6, §2.7 and §6.5 but had **no build status at all** and described a sage + Playfair site that did not exist; this file had the full build record but the older terracotta/Space Grotesk design. Both were folded together and the design direction from the newer draft was actually implemented rather than just documented.
 

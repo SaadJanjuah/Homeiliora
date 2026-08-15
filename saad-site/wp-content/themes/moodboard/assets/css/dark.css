@@ -76,6 +76,7 @@
 		--md-footer-nav: #B8B1A6;
 		--md-footer-meta: #9A9086;
 
+		--md-cta-fg: #1B1A17;
 		--md-icon-sun: inline-flex;
 		--md-icon-moon: none;
 	}
@@ -109,6 +110,7 @@
 	--md-footer-nav: #B8B1A6;
 	--md-footer-meta: #9A9086;
 
+	--md-cta-fg: #1B1A17;
 	--md-icon-sun: inline-flex;
 	--md-icon-moon: none;
 }
