@@ -18,6 +18,12 @@
 	--md-shadow-rgb: 38, 36, 31;
 
 	--md-header-veil: rgba(246, 244, 240, 0.85); /* translucent sticky header */
+	/* Hero photographs: dark wash + light type, in BOTH themes — see the
+	   .home-hero__backdrop::after note for why a pale scrim cannot work. */
+	--md-hero-scrim: rgba(24, 23, 20, 0.72);
+	--md-hero-text: #F4F1EB;
+	--md-hero-eyebrow: #CFDDC8;                  /* pale sage, keeps the accent */
+	--md-hero-dek: #DED9D0;
 	--md-savebtn-bg: rgba(255, 255, 255, 0.92);  /* save pill on a photo     */
 	--md-fill-faint: rgba(218, 213, 201, 0.28);  /* ad-slot placeholder      */
 	--md-fill-fainter: rgba(218, 213, 201, 0.2); /* empty-state panel        */
@@ -287,6 +293,100 @@ html {
 /* The desktop hover underline reads as a stray dash in a vertical list. */
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item > a::after {
 	display: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Home hero — two photographs cross-fading behind the headline.
+
+   The pair is decorative, so the text has to stay readable over whatever
+   frame happens to be showing. Both photos are bright interiors, which is
+   the awkward case in light mode where the type is near-black: the scrim
+   below is tuned per theme and its strength was set by sampling the rendered
+   pixels behind the headline, not by eye. See --md-hero-scrim.
+--------------------------------------------------------------------------- */
+.home-hero {
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
+}
+/* The hero is a constrained layout, and WordPress caps every direct child at
+   contentSize (720px) and centres it. That applies to absolutely-positioned
+   children too, so without this the backdrop sat as a 720px strip inside a
+   1046px band instead of filling it. Scoped through .home-hero to outrank
+   core's layout rule. */
+.home-hero > .home-hero__backdrop {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	overflow: hidden;
+	max-width: none;
+	margin: 0;
+}
+.home-hero__slide {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center 58%;   /* keeps the sofas, not the ceilings */
+	display: block;
+	margin: 0;
+}
+/* Only the second slide animates; the first sits under it at full opacity. */
+.home-hero__slide--b {
+	opacity: 0;
+	animation: md-hero-crossfade 16s ease-in-out infinite;
+}
+@keyframes md-hero-crossfade {
+	0%, 42%  { opacity: 0; }
+	50%, 92% { opacity: 1; }
+	100%     { opacity: 0; }
+}
+/* The scrim that buys back the contrast — deliberately a DARK wash in both
+   themes, with light type over it.
+
+   The obvious alternative, a pale scrim keeping the normal ink-on-plaster
+   type, does not survive measurement: the eyebrow is sage and the dek is
+   muted, and both need a background nearly as bright as plaster to clear
+   4.5:1. Scrimming that hard leaves the photographs invisible, which defeats
+   the point of having them. A dark wash inverts the problem — light text
+   only needs the brightest pixel held below ~104, which a 0.72 wash does
+   while still letting roughly a third of the image through.
+
+   So the hero reads as a dark photographic band in light mode too. There is
+   precedent: the footer is already a dark band in both themes. */
+.home-hero__backdrop::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: var(--md-hero-scrim);
+}
+
+/* Hero type is pinned light, overriding the preset colour classes the block
+   markup carries (which are !important, hence the same here). */
+.home-hero h1,
+.home-hero .home-hero__eyebrow.has-accent-color,
+.home-hero p.has-muted-color {
+	color: var(--md-hero-text) !important;
+}
+.home-hero .home-hero__eyebrow.has-accent-color {
+	color: var(--md-hero-eyebrow) !important;
+}
+.home-hero p.has-muted-color {
+	color: var(--md-hero-dek) !important;
+}
+/* Everything except the backdrop rides above it. */
+.home-hero > *:not(.home-hero__backdrop) {
+	position: relative;
+	z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	/* No cross-fade at all — the first photograph simply stays put. */
+	.home-hero__slide--b {
+		animation: none;
+		opacity: 0;
+	}
 }
 
 /* ---------------------------------------------------------------------------

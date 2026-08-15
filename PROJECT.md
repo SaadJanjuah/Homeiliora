@@ -316,6 +316,13 @@ Nav expansion + sage/Playfair redesign (2026-08-15):
 - [x] **Headlines moved to Playfair Display** (§2.2), self-hosted as a variable font. Space Grotesk keeps the logo, nav, buttons, H4 and meta.
 - [x] Niche tags are links, so they took the theme link colour and ignored the colour set on their `post-terms` wrapper — invisible while links and tags were both terracotta, obvious once links went sage. Fixed with `color: inherit` on the tag links.
 
+Hero photo slider (2026-08-15):
+- [x] Two photographs cross-fade behind the homepage hero, 16s loop with a ~1.3s fade. Only the second slide animates — the first sits under it permanently, so there is nothing to blend on the first frame and one layer is composited rather than two. Honours `prefers-reduced-motion` by holding the first photo still.
+- [x] Source images were 763 KB and 769 KB for 1376×768 — re-encoded at JPEG q72 to 119 KB and 128 KB (**~84% smaller**) before going into the theme, since the hero is an LCP candidate (§6).
+- [x] **The hero is a dark photographic band in both themes, with light type.** A pale scrim keeping the normal ink-on-plaster type does not survive measurement: the eyebrow is sage and the dek is muted, and both need a background nearly as bright as plaster to clear 4.5:1 — scrimming that hard leaves the photographs invisible, defeating the point. A dark wash inverts the problem, needing only the brightest pixel held below ~104. Precedent: the footer is already a dark band in both themes.
+- [x] Scrim strength was set by **sampling the rendered pixels** behind each line of type — the hero captured with the text hidden, at three points in the fade, in both themes, taking the worst pixel rather than the average. First attempt (pale scrim) measured 2.52:1 on the eyebrow and dek; the shipped dark wash measures **5.04:1 worst case** across all 18 samples.
+- [x] The backdrop needed `max-width: none`: the hero is a constrained layout and WordPress caps *every* direct child at contentSize, absolutely-positioned ones included, so it rendered as a 720px strip inside a 1046px band.
+
 Docs (2026-08-15):
 - [x] This file is the merge of two divergent specs. A second copy (`PROJECT (1).md`) carried §2.6, §2.7 and §6.5 but had **no build status at all** and described a sage + Playfair site that did not exist; this file had the full build record but the older terracotta/Space Grotesk design. Both were folded together and the design direction from the newer draft was actually implemented rather than just documented.
 
