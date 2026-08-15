@@ -33,9 +33,15 @@
 	--md-dark-muted: #A49D92;
 	--md-dark-stone: #3A3733;
 	--md-dark-clay: #7C6A5C;
-	--md-dark-accent: #E4764C;
-	--md-dark-accent-soft: #33231B;
-	--md-dark-forest: #86A98A;
+	--md-dark-accent: #9DB394;          /* sage, lifted   7.7:1 on base */
+	--md-dark-accent-soft: #242A22;     /* sage tint     12.1:1 with ink */
+	--md-dark-terracotta: #E4764C;      /* brand accent   5.8:1 on base */
+	--md-dark-terracotta-deep: #E4764C; /* the deep shade only exists to pass
+	                                       contrast on light plaster; on a dark
+	                                       ground it would go muddy, so both
+	                                       terracottas resolve to the lifted one */
+	--md-dark-forest: #86A98A;          /* emerald        6.7:1 on base */
+	--md-dark-gold: #D9BC7A;            /* tertiary       9.5:1 on base */
 }
 
 :root[data-theme="dark"] {
@@ -49,7 +55,10 @@
 	--wp--preset--color--clay: var(--md-dark-clay);
 	--wp--preset--color--accent: var(--md-dark-accent);
 	--wp--preset--color--accent-soft: var(--md-dark-accent-soft);
+	--wp--preset--color--terracotta: var(--md-dark-terracotta);
+	--wp--preset--color--terracotta-deep: var(--md-dark-terracotta-deep);
 	--wp--preset--color--forest: var(--md-dark-forest);
+	--wp--preset--color--gold: var(--md-dark-gold);
 
 	--md-shadow-rgb: 0, 0, 0;
 	--md-hairline: rgba(237, 233, 226, 0.05);

@@ -16,9 +16,12 @@
 				{ "slug": "base", "color": "#F6F4F0", "name": "Warm Plaster" },
 				{ "slug": "surface", "color": "#FFFFFF", "name": "Surface White" },
 				{ "slug": "ink", "color": "#26241F", "name": "Charcoal Ink" },
-				{ "slug": "accent", "color": "#D9643A", "name": "Terracotta Pop" },
-				{ "slug": "accent-soft", "color": "#F0D9CE", "name": "Terracotta Tint" },
-				{ "slug": "forest", "color": "#3F5D42", "name": "Forest Green" },
+				{ "slug": "accent", "color": "#63715B", "name": "Sage" },
+				{ "slug": "accent-soft", "color": "#E3E8DF", "name": "Sage Tint" },
+				{ "slug": "terracotta", "color": "#D9643A", "name": "Brand Terracotta" },
+				{ "slug": "terracotta-deep", "color": "#B04D2A", "name": "Terracotta — Text & CTA" },
+				{ "slug": "forest", "color": "#3F5D42", "name": "Emerald" },
+				{ "slug": "gold", "color": "#C9A860", "name": "Brand Gold" },
 				{ "slug": "clay", "color": "#C4A998", "name": "Dusty Clay" },
 				{ "slug": "stone", "color": "#DAD5C9", "name": "Stone" },
 				{ "slug": "muted", "color": "#6E6A61", "name": "Muted Ink" }
@@ -37,6 +40,14 @@
 						{ "fontFamily": "Space Grotesk", "fontWeight": "400", "fontStyle": "normal", "fontDisplay": "swap", "src": [ "file:./assets/fonts/SpaceGrotesk-400-normal.woff2" ] },
 						{ "fontFamily": "Space Grotesk", "fontWeight": "500", "fontStyle": "normal", "fontDisplay": "swap", "src": [ "file:./assets/fonts/SpaceGrotesk-500-normal.woff2" ] },
 						{ "fontFamily": "Space Grotesk", "fontWeight": "700", "fontStyle": "normal", "fontDisplay": "swap", "src": [ "file:./assets/fonts/SpaceGrotesk-700-normal.woff2" ] }
+					]
+				},
+				{
+					"slug": "editorial",
+					"name": "Playfair Display",
+					"fontFamily": "'Playfair Display', Georgia, 'Times New Roman', serif",
+					"fontFace": [
+						{ "fontFamily": "Playfair Display", "fontWeight": "400 700", "fontStyle": "normal", "fontDisplay": "swap", "src": [ "file:./assets/fonts/PlayfairDisplay-variable-normal.woff2" ] }
 					]
 				},
 				{
@@ -103,7 +114,7 @@
 		"elements": {
 			"heading": {
 				"typography": {
-					"fontFamily": "var:preset|font-family|display",
+					"fontFamily": "var:preset|font-family|editorial",
 					"fontWeight": "700",
 					"lineHeight": "1.15",
 					"letterSpacing": "-0.01em"
@@ -113,7 +124,7 @@
 			"h1": { "typography": { "fontSize": "var:preset|font-size|xx-large" } },
 			"h2": { "typography": { "fontSize": "var:preset|font-size|x-large" } },
 			"h3": { "typography": { "fontSize": "var:preset|font-size|large" } },
-			"h4": { "typography": { "fontSize": "var:preset|font-size|medium", "textTransform": "uppercase", "letterSpacing": "0.08em", "fontWeight": "500" } },
+			"h4": { "typography": { "fontFamily": "var:preset|font-family|display", "fontSize": "var:preset|font-size|medium", "textTransform": "uppercase", "letterSpacing": "0.08em", "fontWeight": "500" } },
 			"link": {
 				"color": { "text": "var:preset|color|accent" },
 				"typography": { "textDecoration": "none" },

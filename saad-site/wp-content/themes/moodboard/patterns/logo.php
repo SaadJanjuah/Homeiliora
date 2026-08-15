@@ -41,7 +41,7 @@ if ( function_exists( 'mb_strlen' ) && mb_strlen( $moodboard_name ) > $moodboard
 	<a class="brand-logo__link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
 		<svg class="brand-logo__mark" viewBox="0 0 160 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
 			<path d="M 22 90 L 80 28 L 138 90" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
-			<circle cx="80" cy="26" r="10" fill="var(--wp--preset--color--accent)"/>
+			<circle cx="80" cy="26" r="10" fill="var(--wp--preset--color--terracotta)"/>
 			<line x1="10" y1="104" x2="150" y2="104" stroke="var(--wp--preset--color--forest)" stroke-width="6" stroke-linecap="round"/>
 		</svg>
 		<span class="brand-logo__word"><?php echo esc_html( $moodboard_head ); ?><?php if ( '' !== $moodboard_tail ) : ?><span class="brand-logo__word-accent"><?php echo esc_html( $moodboard_tail ); ?></span><?php endif; ?></span>

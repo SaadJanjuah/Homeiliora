@@ -132,8 +132,10 @@ html {
 	padding-bottom: 0.16em;
 	margin-bottom: calc(var(--md-mark-h) * (8 / 112) - 1px);
 }
+/* The wordmark stays terracotta even though sage is now the site accent —
+   the logo is a fixed brand asset, not themed UI. */
 .brand-logo__word-accent {
-	color: var(--wp--preset--color--accent);
+	color: var(--wp--preset--color--terracotta);
 }
 .brand-logo__link:hover .brand-logo__word {
 	border-bottom-color: var(--wp--preset--color--accent);
@@ -348,8 +350,23 @@ html {
 	transition: transform 0.5s ease;
 }
 .moodboard-card__niche a {
-	color: var(--wp--preset--color--forest);
+	color: var(--wp--preset--color--terracotta-deep);
 	text-decoration: none;
+}
+
+/* Niche tags are links, so they take the theme's link colour and ignore the
+   colour set on their post-terms wrapper. That went unnoticed while the link
+   colour and the tag colour were both terracotta; now that links are sage the
+   two have to be told apart. `inherit` keeps the tag on whatever colour the
+   block was given, in either theme. */
+.wp-block-post-terms.has-terracotta-deep-color a,
+.single-post__niche a {
+	color: inherit;
+	text-decoration: none;
+}
+.single-post__niche a:hover,
+.wp-block-post-terms.has-terracotta-deep-color a:hover {
+	color: var(--wp--preset--color--accent);
 }
 .moodboard-card__body .wp-block-post-title a {
 	color: var(--wp--preset--color--ink);
@@ -525,7 +542,10 @@ html {
 	font-weight: 600;
 	letter-spacing: 0.03em;
 	color: var(--wp--preset--color--surface);
-	background: var(--wp--preset--color--accent);
+	/* Terracotta, not sage: this is the Pinterest-facing CTA, which the spec
+	   reserves the brand accent for. The deeper shade is the one that clears
+	   AA with a white label — #D9643A only reaches 3.6:1. */
+	background: var(--wp--preset--color--terracotta-deep);
 	border-radius: 999px;
 	text-decoration: none;
 	box-shadow: 0 6px 16px -6px rgba(var(--md-shadow-rgb), 0.5);
@@ -541,7 +561,7 @@ html {
 	height: 1.05em;
 	border-radius: 50%;
 	background: var(--wp--preset--color--surface);
-	color: var(--wp--preset--color--accent);
+	color: var(--wp--preset--color--terracotta-deep);
 	font-weight: 800;
 	font-size: 0.8em;
 	line-height: 1;
@@ -621,7 +641,7 @@ html {
 .saved-app .moodboard-grid { column-count: 3; column-gap: 1.5rem; }
 @media (max-width: 900px) { .saved-app .moodboard-grid { column-count: 2; } }
 @media (max-width: 560px) { .saved-app .moodboard-grid { column-count: 1; } }
-.saved-card__niche { color: var(--wp--preset--color--forest); }
+.saved-card__niche { color: var(--wp--preset--color--terracotta-deep); }
 .saved-remove {
 	margin-top: 0.75rem;
 	padding: 0;
