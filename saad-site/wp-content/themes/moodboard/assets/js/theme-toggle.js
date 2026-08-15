@@ -1,12 +1,13 @@
 /**
  * homeiliora — light / dark theme toggle.
  *
- * The default is whatever the reader's OS asks for; clicking the header button
- * stores an explicit choice in localStorage that overrides it from then on.
+ * The site always starts light. Clicking the header button stores an explicit
+ * choice in localStorage, and dark applies only once that choice is dark; the
+ * operating system's preference is not consulted anywhere.
  * Applying the stored choice is NOT this file's job — an inline snippet in
  * <head> does that before first paint (see moodboard_theme_no_flash_script in
- * functions.php), so the page never flashes white. This file only wires the
- * button, keeps its label honest, and syncs other tabs.
+ * functions.php), so a reader who chose dark never sees a flash of light. This
+ * file only wires the button, keeps its label honest, and syncs other tabs.
  */
 ( function () {
 	'use strict';
@@ -27,16 +28,16 @@
 			localStorage.setItem( KEY, mode );
 		} catch ( e ) {}
 	}
-	function systemPrefersDark() {
-		return !! ( window.matchMedia && window.matchMedia( '( prefers-color-scheme: dark )' ).matches );
-	}
-	/** The theme actually on screen right now. */
+	/**
+	 * The theme actually on screen right now.
+	 *
+	 * Light unless the reader has explicitly chosen dark. The operating
+	 * system's preference is deliberately not consulted: dark.css has no
+	 * prefers-color-scheme rule, so reading it here would report "dark" on a
+	 * dark-themed machine while the page in front of the reader was light.
+	 */
 	function active() {
-		var explicit = root.getAttribute( 'data-theme' );
-		if ( explicit === 'dark' || explicit === 'light' ) {
-			return explicit;
-		}
-		return systemPrefersDark() ? 'dark' : 'light';
+		return root.getAttribute( 'data-theme' ) === 'dark' ? 'dark' : 'light';
 	}
 
 	function paint() {
@@ -66,21 +67,6 @@
 			} );
 		} );
 		paint();
-
-		// Follow the OS while the reader has not picked a side themselves.
-		if ( window.matchMedia ) {
-			var mq = window.matchMedia( '( prefers-color-scheme: dark )' );
-			var onChange = function () {
-				if ( ! stored() ) {
-					paint();
-				}
-			};
-			if ( mq.addEventListener ) {
-				mq.addEventListener( 'change', onChange );
-			} else if ( mq.addListener ) {
-				mq.addListener( onChange );
-			}
-		}
 
 		// Keep other open tabs in step.
 		window.addEventListener( 'storage', function ( e ) {

@@ -6,10 +6,14 @@
  * mode cannot drift out of sync with light mode — and if this file fails to
  * load, the site renders exactly as it did before.
  *
- * Two triggers, same values:
- *   1. the OS asks for dark and the reader has not chosen otherwise
- *   2. the reader picked dark with the header toggle (data-theme="dark")
- * An explicit choice always wins, in both directions.
+ * One trigger: the reader picked dark with the header toggle, which sets
+ * data-theme="dark" on the root element. The site otherwise always starts
+ * light, regardless of what the operating system prefers.
+ *
+ * There is deliberately no prefers-color-scheme rule here. Following the OS
+ * meant anyone on a dark-themed machine landed on the dark site without
+ * asking for it; light is the brand's default presentation and dark is now
+ * strictly opt-in, remembered per browser once chosen.
  */
 
 /* ---------------------------------------------------------------------------
@@ -32,37 +36,6 @@
 	--md-dark-accent: #E4764C;
 	--md-dark-accent-soft: #33231B;
 	--md-dark-forest: #86A98A;
-}
-
-@media (prefers-color-scheme: dark) {
-	:root:not([data-theme="light"]) {
-		color-scheme: dark;
-
-		--wp--preset--color--base: var(--md-dark-base);
-		--wp--preset--color--surface: var(--md-dark-surface);
-		--wp--preset--color--ink: var(--md-dark-ink);
-		--wp--preset--color--muted: var(--md-dark-muted);
-		--wp--preset--color--stone: var(--md-dark-stone);
-		--wp--preset--color--clay: var(--md-dark-clay);
-		--wp--preset--color--accent: var(--md-dark-accent);
-		--wp--preset--color--accent-soft: var(--md-dark-accent-soft);
-		--wp--preset--color--forest: var(--md-dark-forest);
-
-		--md-shadow-rgb: 0, 0, 0;
-		--md-hairline: rgba(237, 233, 226, 0.05);
-		--md-header-veil: rgba(27, 26, 23, 0.86);
-		--md-savebtn-bg: rgba(36, 34, 31, 0.92);
-		--md-fill-faint: rgba(124, 106, 92, 0.16);
-		--md-fill-fainter: rgba(124, 106, 92, 0.12);
-
-		--md-footer-bg: #201E1B;
-		--md-footer-text: #EDE9E2;
-		--md-footer-nav: #B8B1A6;
-		--md-footer-meta: #9A9086;
-
-		--md-icon-sun: inline-flex;
-		--md-icon-moon: none;
-	}
 }
 
 :root[data-theme="dark"] {

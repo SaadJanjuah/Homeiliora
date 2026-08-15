@@ -39,8 +39,9 @@ function moodboard_enqueue_assets() {
 	);
 
 	// Dark mode. Front end only, and deliberately NOT passed to
-	// add_editor_style(): it keys off prefers-color-scheme, which would drag
-	// the editor canvas dark while the editor's own chrome stayed light.
+	// add_editor_style(): it applies solely off data-theme on the front-end
+	// root, which the editor canvas never sets, so loading it there would add
+	// weight without ever taking effect.
 	$dark = get_theme_file_path( 'assets/css/dark.css' );
 	wp_enqueue_style(
 		'moodboard-dark',
@@ -88,8 +89,9 @@ add_action( 'wp_enqueue_scripts', 'moodboard_enqueue_assets' );
  * anything deferred, lands after the browser has already painted the default
  * light page, which is exactly the white flash dark-mode readers complain
  * about. It is a handful of lines and touches nothing but the root element's
- * data-theme attribute — with no stored choice it does nothing at all and the
- * prefers-color-scheme rules in dark.css decide.
+ * data-theme attribute — with no stored choice it does nothing at all, and
+ * the site stays light, which is the default for every first-time visitor
+ * whatever their operating system prefers.
  */
 function moodboard_theme_no_flash_script() {
 	?>
