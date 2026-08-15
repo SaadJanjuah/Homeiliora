@@ -89,9 +89,9 @@ add_action( 'wp_enqueue_scripts', 'moodboard_enqueue_assets' );
  * anything deferred, lands after the browser has already painted the default
  * light page, which is exactly the white flash dark-mode readers complain
  * about. It is a handful of lines and touches nothing but the root element's
- * data-theme attribute — with no stored choice it does nothing at all, and
- * the site stays light, which is the default for every first-time visitor
- * whatever their operating system prefers.
+ * data-theme attribute — with no stored choice it does nothing at all and the
+ * prefers-color-scheme rule in dark.css decides, so a first-time visitor gets
+ * whatever their device asks for.
  */
 function moodboard_theme_no_flash_script() {
 	?>

@@ -1,13 +1,13 @@
 /**
  * homeiliora — light / dark theme toggle.
  *
- * The site always starts light. Clicking the header button stores an explicit
- * choice in localStorage, and dark applies only once that choice is dark; the
- * operating system's preference is not consulted anywhere.
+ * The default is whatever the visitor's device asks for; clicking the header
+ * button stores an explicit choice in localStorage that overrides it from then
+ * on, in either direction.
  * Applying the stored choice is NOT this file's job — an inline snippet in
  * <head> does that before first paint (see moodboard_theme_no_flash_script in
- * functions.php), so a reader who chose dark never sees a flash of light. This
- * file only wires the button, keeps its label honest, and syncs other tabs.
+ * functions.php), so the page never flashes the wrong theme. This file only
+ * wires the button, keeps its label honest, and syncs other tabs.
  */
 ( function () {
 	'use strict';
@@ -28,16 +28,23 @@
 			localStorage.setItem( KEY, mode );
 		} catch ( e ) {}
 	}
+	function devicePrefersDark() {
+		return !! ( window.matchMedia && window.matchMedia( '( prefers-color-scheme: dark )' ).matches );
+	}
+
 	/**
 	 * The theme actually on screen right now.
 	 *
-	 * Light unless the reader has explicitly chosen dark. The operating
-	 * system's preference is deliberately not consulted: dark.css has no
-	 * prefers-color-scheme rule, so reading it here would report "dark" on a
-	 * dark-themed machine while the page in front of the reader was light.
+	 * An explicit choice wins; with none stored, the device decides — which
+	 * has to match dark.css exactly, or the button would label and paint
+	 * itself for a theme the reader isn't looking at.
 	 */
 	function active() {
-		return root.getAttribute( 'data-theme' ) === 'dark' ? 'dark' : 'light';
+		var explicit = root.getAttribute( 'data-theme' );
+		if ( explicit === 'dark' || explicit === 'light' ) {
+			return explicit;
+		}
+		return devicePrefersDark() ? 'dark' : 'light';
 	}
 
 	function paint() {
@@ -67,6 +74,23 @@
 			} );
 		} );
 		paint();
+
+		// Follow the device while the reader has not picked a side themselves.
+		// Only the button needs repainting — the CSS media query has already
+		// re-coloured the page by the time this fires.
+		if ( window.matchMedia ) {
+			var mq = window.matchMedia( '( prefers-color-scheme: dark )' );
+			var onChange = function () {
+				if ( ! stored() ) {
+					paint();
+				}
+			};
+			if ( mq.addEventListener ) {
+				mq.addEventListener( 'change', onChange );
+			} else if ( mq.addListener ) {
+				mq.addListener( onChange );
+			}
+		}
 
 		// Keep other open tabs in step.
 		window.addEventListener( 'storage', function ( e ) {

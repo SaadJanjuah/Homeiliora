@@ -6,14 +6,17 @@
  * mode cannot drift out of sync with light mode — and if this file fails to
  * load, the site renders exactly as it did before.
  *
- * One trigger: the reader picked dark with the header toggle, which sets
- * data-theme="dark" on the root element. The site otherwise always starts
- * light, regardless of what the operating system prefers.
+ * Two triggers, same values:
+ *   1. the visitor's device is set to dark and they have not chosen otherwise
+ *   2. they picked dark with the header toggle (data-theme="dark")
+ * An explicit choice always wins, in both directions — someone on a dark
+ * machine who picks light stays light, and vice versa. With no choice stored,
+ * the device decides; a device set to light gets the light site.
  *
- * There is deliberately no prefers-color-scheme rule here. Following the OS
- * meant anyone on a dark-themed machine landed on the dark site without
- * asking for it; light is the brand's default presentation and dark is now
- * strictly opt-in, remembered per browser once chosen.
+ * The device trigger is a CSS media query rather than something JavaScript
+ * derives, so it still works with scripting unavailable. The cost is that the
+ * variable mappings appear twice; the hex values themselves are declared once,
+ * in the --md-dark-* block below, so the two can't drift apart in substance.
  */
 
 /* ---------------------------------------------------------------------------
@@ -44,6 +47,42 @@
 	--md-dark-gold: #D9BC7A;            /* tertiary       9.5:1 on base */
 }
 
+/* Trigger 1 — the device asks for dark, and the reader has not overridden it. */
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		color-scheme: dark;
+
+		--wp--preset--color--base: var(--md-dark-base);
+		--wp--preset--color--surface: var(--md-dark-surface);
+		--wp--preset--color--ink: var(--md-dark-ink);
+		--wp--preset--color--muted: var(--md-dark-muted);
+		--wp--preset--color--stone: var(--md-dark-stone);
+		--wp--preset--color--clay: var(--md-dark-clay);
+		--wp--preset--color--accent: var(--md-dark-accent);
+		--wp--preset--color--accent-soft: var(--md-dark-accent-soft);
+		--wp--preset--color--terracotta: var(--md-dark-terracotta);
+		--wp--preset--color--terracotta-deep: var(--md-dark-terracotta-deep);
+		--wp--preset--color--forest: var(--md-dark-forest);
+		--wp--preset--color--gold: var(--md-dark-gold);
+
+		--md-shadow-rgb: 0, 0, 0;
+		--md-hairline: rgba(237, 233, 226, 0.05);
+		--md-header-veil: rgba(27, 26, 23, 0.86);
+		--md-savebtn-bg: rgba(36, 34, 31, 0.92);
+		--md-fill-faint: rgba(124, 106, 92, 0.16);
+		--md-fill-fainter: rgba(124, 106, 92, 0.12);
+
+		--md-footer-bg: #201E1B;
+		--md-footer-text: #EDE9E2;
+		--md-footer-nav: #B8B1A6;
+		--md-footer-meta: #9A9086;
+
+		--md-icon-sun: inline-flex;
+		--md-icon-moon: none;
+	}
+}
+
+/* Trigger 2 — the reader picked dark explicitly. */
 :root[data-theme="dark"] {
 	color-scheme: dark;
 
