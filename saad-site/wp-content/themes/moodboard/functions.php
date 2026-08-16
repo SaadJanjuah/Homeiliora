@@ -38,18 +38,6 @@ function moodboard_enqueue_assets() {
 		file_exists( $main ) ? (string) filemtime( $main ) : '0.1.0'
 	);
 
-	// Dark mode. Front end only, and deliberately NOT passed to
-	// add_editor_style(): it applies solely off data-theme on the front-end
-	// root, which the editor canvas never sets, so loading it there would add
-	// weight without ever taking effect.
-	$dark = get_theme_file_path( 'assets/css/dark.css' );
-	wp_enqueue_style(
-		'moodboard-dark',
-		get_theme_file_uri( 'assets/css/dark.css' ),
-		array( 'moodboard-main' ),
-		file_exists( $dark ) ? (string) filemtime( $dark ) : '0.1.0'
-	);
-
 	// Pinterest "Save" hover button on images.
 	$pin = get_theme_file_path( 'assets/js/pinit.js' );
 	wp_enqueue_script(
@@ -57,16 +45,6 @@ function moodboard_enqueue_assets() {
 		get_theme_file_uri( 'assets/js/pinit.js' ),
 		array(),
 		file_exists( $pin ) ? (string) filemtime( $pin ) : '0.1.0',
-		true
-	);
-
-	// Theme toggle wiring (the no-flash part runs inline in <head>).
-	$tt = get_theme_file_path( 'assets/js/theme-toggle.js' );
-	wp_enqueue_script(
-		'moodboard-theme-toggle',
-		get_theme_file_uri( 'assets/js/theme-toggle.js' ),
-		array(),
-		file_exists( $tt ) ? (string) filemtime( $tt ) : '0.1.0',
 		true
 	);
 
@@ -91,28 +69,6 @@ function moodboard_enqueue_assets() {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'moodboard_enqueue_assets' );
-
-/**
- * Apply the reader's saved theme before the first paint.
- *
- * This has to be inline and render-blocking in <head>: an external file, or
- * anything deferred, lands after the browser has already painted the default
- * light page, which is exactly the white flash dark-mode readers complain
- * about. It is a handful of lines and touches nothing but the root element's
- * data-theme attribute — with no stored choice it does nothing at all and the
- * prefers-color-scheme rule in dark.css decides, so a first-time visitor gets
- * whatever their device asks for.
- */
-function moodboard_theme_no_flash_script() {
-	?>
-<script>
-(function(){try{var m=localStorage.getItem('homeiliora_theme_v1');
-if(m==='dark'||m==='light'){document.documentElement.setAttribute('data-theme',m);}}catch(e){}})();
-</script>
-	<?php
-}
-add_action( 'wp_head', 'moodboard_theme_no_flash_script', 1 );
-
 
 /**
  * Site-wide left + right sticky ad rails.

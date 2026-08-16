@@ -13,18 +13,17 @@
 			"defaultGradients": false,
 			"custom": true,
 			"palette": [
-				{ "slug": "base", "color": "#F6F4F0", "name": "Warm Plaster" },
+				{ "slug": "base", "color": "#F1F2F0", "name": "Cool Grey" },
 				{ "slug": "surface", "color": "#FFFFFF", "name": "Surface White" },
-				{ "slug": "ink", "color": "#26241F", "name": "Charcoal Ink" },
-				{ "slug": "accent", "color": "#63715B", "name": "Sage" },
-				{ "slug": "accent-soft", "color": "#E3E8DF", "name": "Sage Tint" },
-				{ "slug": "terracotta", "color": "#D9643A", "name": "Brand Terracotta" },
-				{ "slug": "terracotta-deep", "color": "#B04D2A", "name": "Terracotta — Text & CTA" },
-				{ "slug": "forest", "color": "#3F5D42", "name": "Emerald" },
-				{ "slug": "gold", "color": "#C9A860", "name": "Brand Gold" },
-				{ "slug": "clay", "color": "#C4A998", "name": "Dusty Clay" },
-				{ "slug": "stone", "color": "#DAD5C9", "name": "Stone" },
-				{ "slug": "muted", "color": "#6E6A61", "name": "Muted Ink" }
+				{ "slug": "ink", "color": "#24272A", "name": "Charcoal Grey" },
+				{ "slug": "accent", "color": "#4F6B57", "name": "Green" },
+				{ "slug": "accent-soft", "color": "#E2E8E3", "name": "Green Tint" },
+				{ "slug": "forest", "color": "#334A38", "name": "Deep Green" },
+				{ "slug": "gold", "color": "#C9A860", "name": "Brass" },
+				{ "slug": "gold-deep", "color": "#7E6429", "name": "Brass — Text & Fills" },
+				{ "slug": "clay", "color": "#B9C0B8", "name": "Grey Green" },
+				{ "slug": "stone", "color": "#CFD3CE", "name": "Stone Grey" },
+				{ "slug": "muted", "color": "#666B6B", "name": "Muted Grey" }
 			]
 		},
 		"typography": {

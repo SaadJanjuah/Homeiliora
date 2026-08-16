@@ -1,0 +1,222 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>homeiliora — wild trailing vines</title>
+<style>
+  :root{ --ink:#24272A; --accent:#4F6B57; --forest:#334A38; --gold:#C9A860; --base:#F1F2F0; --muted:#666B6B; }
+  body{ margin:0; padding:36px 40px 70px; background:var(--base);
+        font-family:"Space Grotesk","Segoe UI",Arial,sans-serif; color:var(--ink); }
+  h1{ font-size:15px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:500; margin:0 0 6px; }
+  p.intro{ font-size:13px; color:var(--muted); margin:0 0 8px; max-width:80ch; line-height:1.6; }
+  h2{ font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+      margin:44px 0 16px; font-weight:500; border-top:1px solid #CFD3CE; padding-top:14px; }
+  .row{ display:flex; align-items:flex-end; gap:56px; flex-wrap:wrap; }
+  .lock{ display:inline-flex; align-items:flex-end; gap:.6rem; --h:3.8rem; }
+  .lock svg{ height:var(--h); width:auto; display:block; color:var(--ink); overflow:visible; }
+  .word{ font-weight:700; font-size:1.5rem; line-height:1; letter-spacing:-.02em; white-space:nowrap;
+         border-bottom:2px solid var(--forest); padding-bottom:.16em; }
+  .word b{ color:var(--accent); }
+  .small .lock{ --h:2.6rem; } .small .word{ font-size:1.02rem; }
+  .fav{ display:flex; gap:18px; align-items:center; }
+  .fav span{ display:grid; place-items:center; background:#fff; border:1px solid #CFD3CE; }
+  .fav .s32{ width:32px; height:32px; } .fav .s16{ width:16px; height:16px; }
+  .fav svg{ width:84%; height:84%; color:var(--ink); }
+  .label{ font-size:12px; color:var(--muted); margin-top:8px; }
+  .note{ font-size:12.5px; color:var(--muted); margin:12px 0 0; max-width:72ch; line-height:1.6; }
+  .zoom{ background:#fff; border:1px solid #CFD3CE; padding:16px 20px; display:inline-block; }
+</style>
+
+<h1>Wild vines — mixed foliage, irregular growth</h1>
+<p class="intro">Four different leaf shapes instead of one repeated, sizes from 0.6× to 1.3×, angles scattered rather
+than mirrored, some leaves clustered and some gaps, stems that wander and cross, plus a few aerial roots.
+Irregularity is what makes it read as a plant instead of a pattern.</p>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <!-- Each leaf points +x with its petiole at the origin. -->
+    <g id="lHeart">
+      <path d="M 0 0 C 4 -8 14 -13 26 -8 C 19 2 7 7 0 0 Z" fill="currentColor"/>
+      <path d="M 1.5 -1 C 9 -4 17 -6.5 24 -8" fill="none" stroke="#FFF" stroke-opacity=".30" stroke-width="1.3" stroke-linecap="round"/>
+    </g>
+    <!-- split, monstera-like: notches cut into both edges -->
+    <g id="lSplit">
+      <path d="M 0 0 C 5 -10 17 -15 30 -10 L 23 -7.5 L 29 -5.5 C 28 -2.5 25.5 -0.5 22.5 1
+               L 17 -1 L 21 3 C 15 6.5 5 8 0 0 Z" fill="currentColor"/>
+      <path d="M 1.5 -1 C 10 -4 20 -7 27 -9.5" fill="none" stroke="#FFF" stroke-opacity=".28" stroke-width="1.3" stroke-linecap="round"/>
+    </g>
+    <!-- narrow lance leaf -->
+    <g id="lLance">
+      <path d="M 0 0 C 7 -5 20 -7.5 32 -4 C 21 1 9 3.5 0 0 Z" fill="currentColor"/>
+      <path d="M 2 -0.6 C 11 -2.6 22 -4.2 29 -4.2" fill="none" stroke="#FFF" stroke-opacity=".26" stroke-width="1.1" stroke-linecap="round"/>
+    </g>
+    <!-- curled, seen edge-on -->
+    <g id="lCurl">
+      <path d="M 0 0 C 6 -7 15 -9.5 23 -6 C 17 -4.5 9 -1.5 0 0 Z" fill="currentColor"/>
+    </g>
+    <g id="lYoung">
+      <path d="M 0 0 C 2.5 -4.5 8 -7.5 14 -4.5 C 10 0.5 4 3 0 0 Z" fill="currentColor"/>
+    </g>
+  </defs>
+</svg>
+
+<!-- ===================== W1 ===================== -->
+<h2>W1 — three wandering strands</h2>
+<div class="row">
+  <div class="lock">
+    <svg viewBox="0 0 182 220" id="vW1">
+      <g fill="none" stroke-linecap="round">
+        <path d="M 75 34 C 57 52 47 74 55 98"           stroke="var(--forest)" stroke-width="4.6"/>
+        <path d="M 55 98 C 62 120 46 138 56 164"        stroke="var(--forest)" stroke-width="3"/>
+        <path d="M 56 164 C 61 176 54 184 58 194"       stroke="var(--forest)" stroke-width="2.1"/>
+        <path d="M 86 31 C 95 56 85 82 94 106"          stroke="var(--accent)" stroke-width="5"/>
+        <path d="M 94 106 C 101 134 85 156 96 188"      stroke="var(--accent)" stroke-width="3.2"/>
+        <path d="M 96 188 C 100 200 94 208 98 214"      stroke="var(--accent)" stroke-width="2.2"/>
+        <path d="M 93 42 C 112 60 121 86 112 106"       stroke="var(--forest)" stroke-width="4.3"/>
+        <path d="M 112 106 C 104 128 118 146 108 170"   stroke="var(--forest)" stroke-width="2.8"/>
+        <!-- aerial roots -->
+        <g stroke="var(--accent)" stroke-width="1.5" stroke-opacity=".75">
+          <path d="M 63 118 C 66 128 62 134 65 142"/>
+          <path d="M 101 150 C 104 160 99 166 102 174"/>
+          <path d="M 115 126 C 112 134 116 140 113 146"/>
+        </g>
+        <!-- petioles -->
+        <g stroke="var(--forest)" stroke-width="1.8">
+          <path d="M 64 46 L 58 51"/><path d="M 52 70 L 58 74"/><path d="M 55 92 L 49 95"/>
+          <path d="M 60 122 L 67 124"/><path d="M 51 146 L 45 150"/><path d="M 57 176 L 63 179"/>
+        </g>
+        <g stroke="var(--accent)" stroke-width="1.8">
+          <path d="M 91 50 L 98 54"/><path d="M 88 78 L 82 82"/><path d="M 96 118 L 103 121"/>
+          <path d="M 91 158 L 84 162"/><path d="M 97 196 L 103 199"/>
+        </g>
+        <g stroke="var(--forest)" stroke-width="1.8">
+          <path d="M 105 64 L 112 67"/><path d="M 117 92 L 124 95"/><path d="M 110 138 L 117 141"/>
+        </g>
+      </g>
+      <g>
+        <!-- left strand: clustered near the top, sparse below -->
+        <use href="#lSplit" color="var(--forest)" transform="translate(58,51)  rotate(203) scale(1.15)"/>
+        <use href="#lHeart" color="var(--accent)" transform="translate(58,74)  rotate(-12) scale(0.95)"/>
+        <use href="#lCurl"  color="var(--forest)" transform="translate(49,95)  rotate(212) scale(1.05)"/>
+        <use href="#lLance" color="var(--accent)" transform="translate(67,124) rotate(-32) scale(0.9)"/>
+        <use href="#lHeart" color="var(--forest)" transform="translate(45,150) rotate(196) scale(0.8)"/>
+        <use href="#lYoung" color="var(--accent)" transform="translate(63,179) rotate(-26) scale(1.0)"/>
+        <!-- centre strand: the long one -->
+        <use href="#lHeart" color="var(--accent)" transform="translate(98,54)  rotate(-16) scale(1.25)"/>
+        <use href="#lSplit" color="var(--forest)" transform="translate(82,82)  rotate(206) scale(1.05)"/>
+        <use href="#lHeart" color="var(--gold)"   transform="translate(103,121) rotate(-28) scale(0.9)"/>
+        <use href="#lLance" color="var(--accent)" transform="translate(84,162) rotate(199) scale(0.85)"/>
+        <use href="#lYoung" color="var(--forest)" transform="translate(103,199) rotate(-22) scale(0.95)"/>
+        <!-- right strand -->
+        <use href="#lHeart" color="var(--forest)" transform="translate(112,67) rotate(-26) scale(1.1)"/>
+        <use href="#lSplit" color="var(--accent)" transform="translate(124,95) rotate(-14) scale(0.95)"/>
+        <use href="#lCurl"  color="var(--forest)" transform="translate(117,141) rotate(-34) scale(0.85)"/>
+      </g>
+      <path d="M 22 90 L 82 28 L 142 90" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="82" cy="26" r="10" fill="var(--gold)"/>
+      <line x1="10" y1="104" x2="154" y2="104" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+    </svg>
+    <span class="word">home<b>iliora</b></span>
+  </div>
+  <div class="small">
+    <div class="lock"><svg viewBox="0 0 182 220"><use href="#vW1"/></svg><span class="word">home<b>iliora</b></span></div>
+    <div class="label">mobile size</div>
+  </div>
+  <div>
+    <div class="fav">
+      <span class="s32"><svg viewBox="0 0 182 220"><use href="#vW1"/></svg></span>
+      <span class="s16"><svg viewBox="0 0 182 220"><use href="#vW1"/></svg></span>
+    </div>
+    <div class="label">favicon 32 / 16&nbsp;px</div>
+  </div>
+</div>
+
+<!-- ===================== W2 ===================== -->
+<h2>W2 — five strands, properly overgrown</h2>
+<div class="row">
+  <div class="lock">
+    <svg viewBox="0 0 186 224" id="vW2">
+      <g fill="none" stroke-linecap="round">
+        <path d="M 68 40 C 46 58 38 78 45 98"          stroke="var(--forest)" stroke-width="4.2"/>
+        <path d="M 45 98 C 51 118 39 134 46 156"       stroke="var(--forest)" stroke-width="2.7"/>
+        <path d="M 78 32 C 60 56 54 84 63 106"         stroke="var(--accent)" stroke-width="4.7"/>
+        <path d="M 63 106 C 71 132 55 154 66 182"      stroke="var(--accent)" stroke-width="3"/>
+        <path d="M 66 182 C 70 194 64 202 68 210"      stroke="var(--accent)" stroke-width="2"/>
+        <path d="M 86 30 C 95 60 84 86 93 108"         stroke="var(--forest)" stroke-width="5"/>
+        <path d="M 93 108 C 101 140 84 164 95 202"     stroke="var(--forest)" stroke-width="3.2"/>
+        <path d="M 94 36 C 112 58 120 84 111 106"      stroke="var(--accent)" stroke-width="4.4"/>
+        <path d="M 111 106 C 103 130 118 150 107 178"  stroke="var(--accent)" stroke-width="2.8"/>
+        <path d="M 102 46 C 124 62 133 82 126 100"     stroke="var(--forest)" stroke-width="4"/>
+        <path d="M 126 100 C 119 120 130 136 122 154"  stroke="var(--forest)" stroke-width="2.5"/>
+        <g stroke="var(--accent)" stroke-width="1.4" stroke-opacity=".75">
+          <path d="M 52 124 C 55 134 50 140 53 148"/>
+          <path d="M 99 154 C 102 164 97 170 100 178"/>
+          <path d="M 128 118 C 125 126 129 132 126 138"/>
+          <path d="M 71 146 C 74 154 70 160 72 166"/>
+        </g>
+        <g stroke="var(--forest)" stroke-width="1.7">
+          <path d="M 52 58 L 45 62"/><path d="M 44 90 L 50 94"/><path d="M 47 130 L 40 134"/>
+          <path d="M 92 56 L 99 60"/><path d="M 89 88 L 82 92"/><path d="M 96 130 L 103 133"/><path d="M 89 170 L 82 174"/>
+          <path d="M 128 74 L 135 77"/><path d="M 124 116 L 131 119"/>
+        </g>
+        <g stroke="var(--accent)" stroke-width="1.7">
+          <path d="M 60 62 L 67 66"/><path d="M 62 98 L 55 102"/><path d="M 70 140 L 77 143"/><path d="M 64 190 L 58 194"/>
+          <path d="M 112 64 L 119 68"/><path d="M 113 98 L 106 102"/><path d="M 110 152 L 117 155"/>
+        </g>
+      </g>
+      <g>
+        <use href="#lSplit" color="var(--forest)" transform="translate(45,62)  rotate(206) scale(1.05)"/>
+        <use href="#lHeart" color="var(--accent)" transform="translate(50,94)  rotate(-14) scale(0.9)"/>
+        <use href="#lCurl"  color="var(--forest)" transform="translate(40,134) rotate(210) scale(0.9)"/>
+
+        <use href="#lHeart" color="var(--accent)" transform="translate(67,66)  rotate(-18) scale(1.1)"/>
+        <use href="#lLance" color="var(--forest)" transform="translate(55,102) rotate(200) scale(0.95)"/>
+        <use href="#lSplit" color="var(--accent)" transform="translate(77,143) rotate(-30) scale(0.9)"/>
+        <use href="#lYoung" color="var(--gold)"   transform="translate(58,194) rotate(198) scale(1.0)"/>
+
+        <use href="#lSplit" color="var(--forest)" transform="translate(99,60)  rotate(-20) scale(1.3)"/>
+        <use href="#lHeart" color="var(--accent)" transform="translate(82,92)  rotate(204) scale(1.05)"/>
+        <use href="#lCurl"  color="var(--forest)" transform="translate(103,133) rotate(-26) scale(1.0)"/>
+        <use href="#lHeart" color="var(--accent)" transform="translate(82,174) rotate(196) scale(0.85)"/>
+
+        <use href="#lHeart" color="var(--accent)" transform="translate(119,68) rotate(-24) scale(1.05)"/>
+        <use href="#lLance" color="var(--forest)" transform="translate(106,102) rotate(202) scale(0.9)"/>
+        <use href="#lYoung" color="var(--accent)" transform="translate(117,155) rotate(-28) scale(1.0)"/>
+
+        <use href="#lSplit" color="var(--forest)" transform="translate(135,77) rotate(-30) scale(0.95)"/>
+        <use href="#lHeart" color="var(--accent)" transform="translate(131,119) rotate(-22) scale(0.85)"/>
+      </g>
+      <path d="M 22 90 L 82 28 L 142 90" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="82" cy="26" r="10" fill="var(--gold)"/>
+      <line x1="10" y1="104" x2="154" y2="104" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+    </svg>
+    <span class="word">home<b>iliora</b></span>
+  </div>
+  <div class="small">
+    <div class="lock"><svg viewBox="0 0 186 224"><use href="#vW2"/></svg><span class="word">home<b>iliora</b></span></div>
+    <div class="label">mobile size</div>
+  </div>
+  <div>
+    <div class="fav">
+      <span class="s32"><svg viewBox="0 0 186 224"><use href="#vW2"/></svg></span>
+      <span class="s16"><svg viewBox="0 0 186 224"><use href="#vW2"/></svg></span>
+    </div>
+    <div class="label">favicon 32 / 16&nbsp;px</div>
+  </div>
+</div>
+
+<h2>The four leaf shapes, enlarged</h2>
+<div class="zoom">
+  <svg viewBox="0 0 260 70" width="600" height="162">
+    <g fill="none" stroke="var(--forest)" stroke-width="2.4" stroke-linecap="round">
+      <path d="M 14 40 L 20 32"/><path d="M 82 40 L 88 32"/><path d="M 150 40 L 156 32"/><path d="M 214 40 L 220 32"/>
+    </g>
+    <use href="#lHeart" color="var(--forest)" transform="translate(20,32) rotate(-12) scale(1.7)"/>
+    <use href="#lSplit" color="var(--accent)" transform="translate(88,32) rotate(-12) scale(1.7)"/>
+    <use href="#lLance" color="var(--forest)" transform="translate(156,32) rotate(-12) scale(1.5)"/>
+    <use href="#lCurl"  color="var(--accent)" transform="translate(220,32) rotate(-12) scale(1.7)"/>
+    <g font-size="9" fill="#666B6B" font-family="Space Grotesk, Arial">
+      <text x="14" y="62">heart</text><text x="82" y="62">split</text><text x="150" y="62">lance</text><text x="214" y="62">curled</text>
+    </g>
+  </svg>
+</div>
+<p class="note">Mixing these four, at scattered angles and sizes, is what stops the repetition. The split leaf does most
+of the wild work — it breaks the silhouette so the eye reads foliage rather than a row of shapes.</p>

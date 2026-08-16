@@ -5,19 +5,17 @@
  */
 
 /* ---------------------------------------------------------------------------
-   Local tokens — the light-mode values.
-   Everything here is a colour theme.json can't express: translucent veils,
-   shadow tints, and the few places a preset is used for its literal darkness
-   rather than its meaning. dark.css re-points these (and the theme.json
-   presets) for dark mode, so every rule below is written exactly once.
+   Local tokens.
+   Colours theme.json can't express: translucent veils, shadow tints, and the
+   few places a preset is used for its literal darkness rather than its
+   meaning. The site is light-only — dark mode was removed 2026-08-16.
 --------------------------------------------------------------------------- */
 :root {
-	color-scheme: light;
 
 	/* Shadows are tinted with the brand charcoal, not pure black. */
-	--md-shadow-rgb: 38, 36, 31;
+	--md-shadow-rgb: 36, 39, 42;
 
-	--md-header-veil: rgba(246, 244, 240, 0.85); /* translucent sticky header */
+	--md-header-veil: rgba(241, 242, 240, 0.85); /* translucent sticky header */
 	/* Hero photographs: gradient scrim + light type, in BOTH themes. Dense on
 	   the left where the text sits, clearing to the right so the room stays
 	   sharp. See the .home-hero__backdrop::after note. */
@@ -30,37 +28,32 @@
 		rgba(22, 21, 18, 0.10) 100%
 	);
 	--md-hero-text: #FFFFFF;
-	--md-hero-accent: #E4764C;                   /* terracotta, lifted for dark */
-	--md-hero-eyebrow: #DDE8D8;                  /* pale sage, keeps the accent */
+	--md-hero-accent: #C9A860;                   /* brass, the one warm note */
+	--md-hero-eyebrow: #DDE8D8;                  /* pale green over the photo */
 	--md-hero-dek: #E6E1D8;
 	--md-hero-min-h: 29.5rem;                    /* ~4:1 band, as the reference */
 	--md-badge-bg: #F3E4BE;                      /* pale gold, behind the mark */
-	--md-badge-ink: #26241F;                     /* constant in both themes */
+	--md-badge-ink: #24272A;                     /* constant in both themes */
 
-	/* Label on the terracotta CTAs. White works on the deep light-mode shade
-	   (5.33:1) but only reaches 3.0:1 on the lifted dark-mode one, so dark
-	   mode flips the label instead of the fill — see dark.css. */
-	--md-cta-fg: #FFFFFF;
+	/* Label on the brass CTAs. Ink, not white: white on brass is only 1.9:1,
+	   while ink on it measures 6.62:1. */
+	--md-cta-fg: #24272A;
 	--md-savebtn-bg: rgba(255, 255, 255, 0.92);  /* save pill on a photo     */
-	--md-fill-faint: rgba(218, 213, 201, 0.28);  /* ad-slot placeholder      */
-	--md-fill-fainter: rgba(218, 213, 201, 0.2); /* empty-state panel        */
+	--md-fill-faint: rgba(207, 211, 206, 0.30);  /* ad-slot placeholder      */
+	--md-fill-fainter: rgba(207, 211, 206, 0.22); /* empty-state panel        */
 
 	/* The footer is a deliberate dark band in light mode, so it needs its own
 	   colours rather than the flipped presets. */
 	--md-footer-bg: var(--wp--preset--color--ink);
-	--md-footer-text: #F6F4F0;
-	--md-footer-nav: #DAD5C9;
-	--md-footer-meta: #C4A998;
+	--md-footer-text: #F1F2F0;
+	--md-footer-nav: #C6CBC5;
+	--md-footer-meta: #A3A9A3;
 
 	/* Mirrors theme.json's layout.wideSize. Kept as a token because the ad
 	   rails have to know where the content column ends, and because the rule
 	   below narrows it on screens too tight to hold rails otherwise. */
 	--md-col-w: 1200px;
 
-	/* Which theme-toggle icon is showing. Driven from here so the button has
-	   no conditional CSS of its own — and no flash before JS runs. */
-	--md-icon-sun: none;
-	--md-icon-moon: inline-flex;
 }
 
 /* ---------------------------------------------------------------------------
@@ -116,7 +109,7 @@ html {
    over the frosted effect anyway, so it never actually rendered. */
 /* Brand lockup — mark beside wordmark. Both halves take their colour from
    the theme presets (the mark via currentColor and var() inside the inlined
-   SVG), so dark mode needs no second asset and no swapping. */
+   SVG), so it needs no second asset. */
 .brand-logo {
 	margin: 0;
 }
@@ -124,7 +117,7 @@ html {
 	/* One knob for the whole lockup: the mark's height. The wordmark's rule
 	   is positioned from it below, so the two halves stay locked together at
 	   any size — change this alone to rescale the logo. */
-	--md-mark-h: 2.35rem;
+	--md-mark-h: 3.1rem;
 
 	display: inline-flex;
 	/* Bottom-aligned, so the mark's rule and the wordmark's rule sit on a
@@ -148,17 +141,18 @@ html {
 	letter-spacing: -0.02em;
 	white-space: nowrap;
 	/* The forest rule that sits under the wordmark in the brand mark.
-	   Inside the SVG that rule is drawn 8 units up from the bottom of a
-	   112-unit viewBox, so lifting this one by the same fraction of the
-	   mark's height (less half its own 2px weight) puts both on one line. */
+	   Inside the SVG that rule is drawn at y=104 of a 168-unit viewBox — so
+	   64 units up from the bottom, the rest being trailing vine. Lifting this
+	   rule by the same fraction of the mark's height (less half its own 2px
+	   weight) puts both on one line, and leaves the vines hanging below. If
+	   the mark's viewBox changes, this fraction has to change with it. */
 	border-bottom: 2px solid var(--wp--preset--color--forest);
 	padding-bottom: 0.16em;
-	margin-bottom: calc(var(--md-mark-h) * (8 / 112) - 1px);
+	margin-bottom: calc(var(--md-mark-h) * (64 / 168) - 1px);
 }
-/* The wordmark stays terracotta even though sage is now the site accent —
-   the logo is a fixed brand asset, not themed UI. */
+/* The wordmark tail carries the brand green. */
 .brand-logo__word-accent {
-	color: var(--wp--preset--color--terracotta);
+	color: var(--wp--preset--color--accent);
 }
 .brand-logo__link:hover .brand-logo__word {
 	border-bottom-color: var(--wp--preset--color--accent);
@@ -175,11 +169,11 @@ html {
    an off-by-one here leaves a single width that wraps. Below 600px the
    hamburger frees the space up again and the logo can breathe. */
 @media (min-width: 600px) and (max-width: 700px) {
-	.brand-logo__link { --md-mark-h: 1.75rem; }
+	.brand-logo__link { --md-mark-h: 2.3rem; }
 	.brand-logo__word { font-size: 1.05rem; }
 }
 @media (max-width: 599px) {
-	.brand-logo__link { --md-mark-h: 1.95rem; }
+	.brand-logo__link { --md-mark-h: 2.55rem; }
 	.brand-logo__word { font-size: 1.2rem; }
 }
 
@@ -296,6 +290,27 @@ html {
 .wp-block-navigation__responsive-container.is-menu-open a {
 	padding-block: 0.35rem;
 }
+/* Collapse submenus in the overlay until their toggle is tapped.
+   Core renders the toggle and keeps its aria-expanded honest, but inside the
+   responsive overlay it shows every submenu open regardless — which turned the
+   mobile menu into a 1351px wall of 33 links. This is the only piece missing:
+   act on the state core is already tracking. */
+.wp-block-navigation__responsive-container.is-menu-open
+	button[aria-expanded="false"] ~ .wp-block-navigation__submenu-container {
+	display: none;
+}
+/* Give the row a real tap target and turn the chevron when it opens. */
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content {
+	padding-block: 0.45rem;
+}
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-icon {
+	transition: transform 0.18s ease;
+}
+.wp-block-navigation__responsive-container.is-menu-open
+	button[aria-expanded="true"] ~ .wp-block-navigation__submenu-icon {
+	transform: rotate(180deg);
+}
+
 /* The submenu is a nested list here, not a floating card. */
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-container {
 	background: transparent;
@@ -355,11 +370,14 @@ html {
 /* Only the second slide animates; the first sits under it at full opacity. */
 .home-hero__slide--b {
 	opacity: 0;
-	animation: md-hero-crossfade 16s ease-in-out infinite;
+	/* 11s, not 16s: at the old timing nothing moved for the first 6.7 seconds,
+	   which reads as a broken slider rather than a slow one. The first fade
+	   now starts at ~3.7s and each photograph holds for about four. */
+	animation: md-hero-crossfade 11s ease-in-out infinite;
 }
 @keyframes md-hero-crossfade {
-	0%, 42%  { opacity: 0; }
-	50%, 92% { opacity: 1; }
+	0%, 34%  { opacity: 0; }
+	44%, 90% { opacity: 1; }
 	100%     { opacity: 0; }
 }
 /* The scrim is a HORIZONTAL gradient, not a flat wash.
@@ -435,7 +453,7 @@ html {
 	margin-top: 1.5rem;
 }
 .home-hero__cta .wp-block-button__link {
-	background-color: var(--wp--preset--color--terracotta-deep);
+	background-color: var(--wp--preset--color--gold);
 	color: var(--md-cta-fg);
 	padding: 0.7rem 1.35rem;
 	font-size: 0.9375rem;
@@ -443,7 +461,7 @@ html {
 }
 .home-hero__cta .wp-block-button__link:hover,
 .home-hero__cta .wp-block-button__link:focus {
-	background-color: var(--wp--preset--color--terracotta);
+	background-color: var(--wp--preset--color--gold-deep);
 	color: var(--md-cta-fg);
 }
 /* Everything except the backdrop rides above it. */
@@ -536,7 +554,7 @@ html {
 	border-radius: 50%;
 	background: var(--md-badge-bg);
 	/* Pinned dark, not `ink`: the badge stays pale gold in both themes, and a
-	   flipped ink would put near-white strokes on it in dark mode. */
+	   ink is reserved for text on the page background. */
 	color: var(--md-badge-ink);
 	box-shadow: 0 0 0 0.55rem var(--wp--preset--color--surface);
 }
@@ -564,7 +582,7 @@ html {
 	margin-top: var(--wp--preset--spacing--40);
 }
 .get-inspired__cta .wp-block-button__link {
-	background-color: var(--wp--preset--color--terracotta-deep);
+	background-color: var(--wp--preset--color--gold);
 	color: var(--md-cta-fg);
 	padding: 0.7rem 1.35rem;
 	font-size: 0.9375rem;
@@ -572,7 +590,7 @@ html {
 }
 .get-inspired__cta .wp-block-button__link:hover,
 .get-inspired__cta .wp-block-button__link:focus {
-	background-color: var(--wp--preset--color--terracotta);
+	background-color: var(--wp--preset--color--gold-deep);
 	color: var(--md-cta-fg);
 }
 
@@ -629,9 +647,7 @@ html {
 	border-radius: 4px;
 	overflow: hidden;
 	border: 1px solid var(--wp--preset--color--stone);
-	/* Theme-swap colours ride along here rather than in the theme-toggle
-	   section below, so that rule cannot clobber the hover lift. */
-	transition: transform 0.28s ease, box-shadow 0.28s ease,
+		transition: transform 0.28s ease, box-shadow 0.28s ease,
 		background-color 0.25s ease, border-color 0.25s ease;
 	will-change: transform;
 }
@@ -647,22 +663,21 @@ html {
 	transition: transform 0.5s ease;
 }
 .moodboard-card__niche a {
-	color: var(--wp--preset--color--terracotta-deep);
+	color: var(--wp--preset--color--forest);
 	text-decoration: none;
 }
 
 /* Niche tags are links, so they take the theme's link colour and ignore the
    colour set on their post-terms wrapper. That went unnoticed while the link
-   colour and the tag colour were both terracotta; now that links are sage the
-   two have to be told apart. `inherit` keeps the tag on whatever colour the
+   colour and the tag colour were the same; they are told apart now. `inherit` keeps the tag on whatever colour the
    block was given, in either theme. */
-.wp-block-post-terms.has-terracotta-deep-color a,
+.wp-block-post-terms.has-forest-color a,
 .single-post__niche a {
 	color: inherit;
 	text-decoration: none;
 }
 .single-post__niche a:hover,
-.wp-block-post-terms.has-terracotta-deep-color a:hover {
+.wp-block-post-terms.has-forest-color a:hover {
 	color: var(--wp--preset--color--accent);
 }
 .moodboard-card__body .wp-block-post-title a {
@@ -839,10 +854,9 @@ html {
 	font-weight: 600;
 	letter-spacing: 0.03em;
 	color: var(--wp--preset--color--surface);
-	/* Terracotta, not sage: this is the Pinterest-facing CTA, which the spec
-	   reserves the brand accent for. The deeper shade is the one that clears
-	   AA with a white label — #D9643A only reaches 3.6:1. */
-	background: var(--wp--preset--color--terracotta-deep);
+	/* Green rather than brass: this is a UI affordance on a photograph, not
+	   the brass call-to-action, and white on green measures 5.88:1. */
+	background: var(--wp--preset--color--accent);
 	border-radius: 999px;
 	text-decoration: none;
 	box-shadow: 0 6px 16px -6px rgba(var(--md-shadow-rgb), 0.5);
@@ -858,7 +872,7 @@ html {
 	height: 1.05em;
 	border-radius: 50%;
 	background: var(--wp--preset--color--surface);
-	color: var(--wp--preset--color--terracotta-deep);
+	color: var(--wp--preset--color--forest);
 	font-weight: 800;
 	font-size: 0.8em;
 	line-height: 1;
@@ -938,7 +952,7 @@ html {
 .saved-app .moodboard-grid { column-count: 3; column-gap: 1.5rem; }
 @media (max-width: 900px) { .saved-app .moodboard-grid { column-count: 2; } }
 @media (max-width: 560px) { .saved-app .moodboard-grid { column-count: 1; } }
-.saved-card__niche { color: var(--wp--preset--color--terracotta-deep); }
+.saved-card__niche { color: var(--wp--preset--color--forest); }
 .saved-remove {
 	margin-top: 0.75rem;
 	padding: 0;
@@ -1007,9 +1021,8 @@ html {
 /* ---------------------------------------------------------------------------
    Footer — a dark band in BOTH themes.
    The block markup paints it with the `ink` / `base` / `stone` / `clay`
-   presets, which are exactly the presets dark mode flips. Left alone the
-   footer would inverse into a glaring light slab at the foot of a dark page,
-   so its colours are pinned to their own tokens here. The preset classes
+   presets. It is a deliberate dark band on a light page, so its colours are
+   pinned to their own tokens rather than following the palette. The preset classes
    WordPress emits carry !important, hence the doubled-class specificity.
 --------------------------------------------------------------------------- */
 .wp-block-group.site-footer {
@@ -1031,7 +1044,7 @@ html {
     { color: inherit }` — a deliberately doubled class, and more specific than
    any reasonable selector here. Without this the links silently inherit the
    footer's text colour instead of the softer tone this rule asks for, which
-   is what they did before dark mode landed. Hover is scoped a notch tighter
+   is what they did originally. Hover is scoped a notch tighter
    again so it still wins against the line above. */
 .site-footer .footer-nav a {
 	color: var(--md-footer-nav) !important;
@@ -1180,44 +1193,6 @@ html {
 	}
 }
 
-/* ---------------------------------------------------------------------------
-   Theme toggle — sits beside the header search and matches its shape.
-   Which icon shows is decided by --md-icon-*, set in :root (light) and
-   re-set by dark.css, so the correct icon is painted server-side-first with
-   no JavaScript and no flash.
---------------------------------------------------------------------------- */
-.theme-toggle {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	width: 2.15rem;
-	height: 2.15rem;
-	padding: 0;
-	flex: 0 0 auto;
-	color: var(--wp--preset--color--ink);
-	background: transparent;
-	border: 1px solid var(--wp--preset--color--stone);
-	border-radius: 4px;
-	cursor: pointer;
-	transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
-}
-.theme-toggle:hover {
-	color: var(--wp--preset--color--accent);
-	border-color: var(--wp--preset--color--clay);
-}
-.theme-toggle svg {
-	width: 1.05rem;
-	height: 1.05rem;
-	display: block;
-	fill: none;
-	stroke: currentColor;
-	stroke-width: 1.6;
-	stroke-linecap: round;
-	stroke-linejoin: round;
-}
-.theme-toggle__icon { align-items: center; justify-content: center; }
-.theme-toggle__icon--sun { display: var(--md-icon-sun); }
-.theme-toggle__icon--moon { display: var(--md-icon-moon); }
 
 /* Ease the swap between themes — but only the surfaces, never text, so
    reading never smears. Suppressed under reduced-motion below.

@@ -1,26 +1,79 @@
-<svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
-  <!-- icon, centered -->
-  <g transform="translate(120, 20)">
-    <path d="M 20 95 L 80 30 L 140 95"
-          fill="none" stroke="#26241F" stroke-width="11"
-          stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="80" cy="28" r="10" fill="#D9643A"/>
-    <line x1="8" y1="122" x2="152" y2="122"
-          stroke="#3F5D42" stroke-width="6" stroke-linecap="round"/>
+<svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="homeiliora">
+  <!--
+    Square brand mark — the full lockup's foliage, for social avatars, Pinterest
+    profile art, and og:image use. Text is deliberately omitted: an SVG loaded
+    through <img> cannot reach the site's @font-face rules, so a wordmark here
+    would silently fall back to Arial rather than Space Grotesk.
+
+    Literal hex, for the same isolated-document reason. Keep in step with the
+    palette: ink #24272A · green #4F6B57 · deep green #334A38 · brass #C9A860
+  -->
+  <rect width="260" height="260" rx="18" fill="#F1F2F0"/>
+
+  <g transform="translate(38,34) scale(1.02)">
+    <g fill="none" stroke-linecap="round">
+      <path d="M 75 34 C 57 52 47 74 55 98" stroke="#334A38" stroke-width="4.6"/>
+      <path d="M 55 98 C 62 118 47 134 56 158" stroke="#334A38" stroke-width="3"/>
+      <path d="M 86 31 C 95 56 85 82 94 106" stroke="#4F6B57" stroke-width="5"/>
+      <path d="M 94 106 C 101 130 86 148 96 166" stroke="#4F6B57" stroke-width="3.2"/>
+      <path d="M 93 42 C 112 60 121 86 112 106" stroke="#334A38" stroke-width="4.3"/>
+      <path d="M 112 106 C 105 126 117 142 109 160" stroke="#334A38" stroke-width="2.8"/>
+      <g stroke="#4F6B57" stroke-width="1.5" stroke-opacity=".75">
+        <path d="M 63 116 C 66 126 62 132 65 140"/>
+        <path d="M 101 138 C 104 148 99 154 102 160"/>
+        <path d="M 115 124 C 112 132 116 138 113 144"/>
+      </g>
+      <g stroke="#334A38" stroke-width="1.8">
+        <path d="M 64 46 L 58 51"/><path d="M 52 70 L 58 74"/><path d="M 55 92 L 49 95"/>
+        <path d="M 60 120 L 67 123"/><path d="M 53 142 L 47 146"/>
+      </g>
+      <g stroke="#4F6B57" stroke-width="1.8">
+        <path d="M 91 50 L 98 54"/><path d="M 88 78 L 82 82"/><path d="M 96 116 L 103 119"/><path d="M 91 148 L 85 152"/>
+      </g>
+      <g stroke="#334A38" stroke-width="1.8">
+        <path d="M 105 64 L 112 67"/><path d="M 117 92 L 124 95"/><path d="M 111 132 L 118 135"/>
+      </g>
+    </g>
+
+    <g>
+      <path d="M 0 0 C 5 -10 17 -15 30 -10 L 23 -7.5 L 29 -5.5 C 28 -2.5 25.5 -0.5 22.5 1 L 17 -1 L 21 3 C 15 6.5 5 8 0 0 Z" fill="#334A38" transform="translate(58,51) rotate(203) scale(1.15)"/>
+      <path d="M 0 0 C 4 -8 14 -13 26 -8 C 19 2 7 7 0 0 Z" fill="#4F6B57" transform="translate(58,74) rotate(-12) scale(0.95)"/>
+      <path d="M 0 0 C 6 -7 15 -9.5 23 -6 C 17 -4.5 9 -1.5 0 0 Z" fill="#334A38" transform="translate(49,95) rotate(212) scale(1.05)"/>
+      <path d="M 0 0 C 7 -5 20 -7.5 32 -4 C 21 1 9 3.5 0 0 Z" fill="#4F6B57" transform="translate(67,123) rotate(-32) scale(0.9)"/>
+      <path d="M 0 0 C 2.5 -4.5 8 -7.5 14 -4.5 C 10 0.5 4 3 0 0 Z" fill="#334A38" transform="translate(47,146) rotate(196) scale(0.9)"/>
+
+      <path d="M 0 0 C 4 -8 14 -13 26 -8 C 19 2 7 7 0 0 Z" fill="#4F6B57" transform="translate(98,54) rotate(-16) scale(1.25)"/>
+      <path d="M 0 0 C 5 -10 17 -15 30 -10 L 23 -7.5 L 29 -5.5 C 28 -2.5 25.5 -0.5 22.5 1 L 17 -1 L 21 3 C 15 6.5 5 8 0 0 Z" fill="#334A38" transform="translate(82,82) rotate(206) scale(1.05)"/>
+      <path d="M 0 0 C 4 -8 14 -13 26 -8 C 19 2 7 7 0 0 Z" fill="#C9A860" transform="translate(103,119) rotate(-28) scale(0.9)"/>
+      <path d="M 0 0 C 2.5 -4.5 8 -7.5 14 -4.5 C 10 0.5 4 3 0 0 Z" fill="#4F6B57" transform="translate(85,152) rotate(198) scale(0.9)"/>
+
+      <path d="M 0 0 C 4 -8 14 -13 26 -8 C 19 2 7 7 0 0 Z" fill="#334A38" transform="translate(112,67) rotate(-26) scale(1.1)"/>
+      <path d="M 0 0 C 5 -10 17 -15 30 -10 L 23 -7.5 L 29 -5.5 C 28 -2.5 25.5 -0.5 22.5 1 L 17 -1 L 21 3 C 15 6.5 5 8 0 0 Z" fill="#4F6B57" transform="translate(124,95) rotate(-14) scale(0.95)"/>
+      <path d="M 0 0 C 6 -7 15 -9.5 23 -6 C 17 -4.5 9 -1.5 0 0 Z" fill="#334A38" transform="translate(118,135) rotate(-34) scale(0.85)"/>
+    </g>
+
+    <g fill="#C9A860">
+      <g transform="translate(69,63) rotate(14) scale(1.05)">
+        <ellipse cx="0" cy="-6.4" rx="3.6" ry="5.4"/><ellipse cx="0" cy="-6.4" rx="3.6" ry="5.4" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6.4" rx="3.6" ry="5.4" transform="rotate(144)"/><ellipse cx="0" cy="-6.4" rx="3.6" ry="5.4" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6.4" rx="3.6" ry="5.4" transform="rotate(288)"/><circle r="2.7" fill="#7E6429"/>
+      </g>
+      <g transform="translate(105,100) rotate(-20) scale(0.9)">
+        <ellipse cx="0" cy="-6.4" rx="3.6" ry="5.4"/><ellipse cx="0" cy="-6.4" rx="3.6" ry="5.4" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6.4" rx="3.6" ry="5.4" transform="rotate(144)"/><ellipse cx="0" cy="-6.4" rx="3.6" ry="5.4" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6.4" rx="3.6" ry="5.4" transform="rotate(288)"/><circle r="2.7" fill="#7E6429"/>
+      </g>
+      <g transform="translate(62,131) rotate(8) scale(0.8)">
+        <ellipse cx="0" cy="-6.4" rx="3.6" ry="5.4"/><ellipse cx="0" cy="-6.4" rx="3.6" ry="5.4" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6.4" rx="3.6" ry="5.4" transform="rotate(144)"/><ellipse cx="0" cy="-6.4" rx="3.6" ry="5.4" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6.4" rx="3.6" ry="5.4" transform="rotate(288)"/><circle r="2.7" fill="#7E6429"/>
+      </g>
+      <ellipse rx="3" ry="4.4" transform="translate(89,133) rotate(24) scale(0.95)"/>
+      <ellipse rx="3" ry="4.4" transform="translate(122,80) rotate(-18) scale(0.85)"/>
+    </g>
+
+    <path d="M 22 90 L 82 28 L 142 90" fill="none" stroke="#24272A" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="82" cy="26" r="10" fill="#C9A860"/>
+    <line x1="10" y1="104" x2="154" y2="104" stroke="#24272A" stroke-width="6" stroke-linecap="round"/>
   </g>
-
-  <!-- wordmark, centered -->
-  <text x="200" y="240" text-anchor="middle"
-        font-family="'Space Grotesk','Helvetica Neue',Arial,sans-serif"
-        font-weight="700" font-size="46" letter-spacing="-0.5">
-    <tspan fill="#26241F">home</tspan><tspan fill="#D9643A">iliora</tspan>
-  </text>
-
-  <!-- baseline rule -->
-  <line x1="90" y1="256" x2="310" y2="256"
-        stroke="#3F5D42" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
-
-  <!-- pin accent -->
-  <rect x="296" y="234" width="11" height="11" fill="#D9643A"
-        transform="rotate(45 301.5 239.5)"/>
 </svg>
