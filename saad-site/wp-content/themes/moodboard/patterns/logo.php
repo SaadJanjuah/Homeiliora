@@ -94,36 +94,35 @@ if ( function_exists( 'mb_strlen' ) && mb_strlen( $moodboard_name ) > $moodboard
 				<g stroke="var(--wp--preset--color--accent)" stroke-width="1.5" stroke-opacity=".75">
 					<path d="M 63 116 C 66 126 62 132 65 140"/>
 					<path d="M 101 138 C 104 148 99 154 102 160"/>
-					<path d="M 115 124 C 112 132 116 138 113 144"/>
 				</g>
 
+				<!-- One petiole per remaining leaf. -->
 				<g stroke="var(--wp--preset--color--forest)" stroke-width="1.8">
-					<path d="M 64 46 L 58 51"/><path d="M 52 70 L 58 74"/><path d="M 55 92 L 49 95"/>
-					<path d="M 60 120 L 67 123"/><path d="M 53 142 L 47 146"/>
+					<path d="M 64 46 L 58 51"/><path d="M 55 92 L 49 95"/><path d="M 53 142 L 47 146"/>
 				</g>
 				<g stroke="var(--wp--preset--color--accent)" stroke-width="1.8">
-					<path d="M 91 50 L 98 54"/><path d="M 88 78 L 82 82"/><path d="M 96 116 L 103 119"/><path d="M 91 148 L 85 152"/>
+					<path d="M 91 50 L 98 54"/><path d="M 88 78 L 82 82"/>
 				</g>
 				<g stroke="var(--wp--preset--color--forest)" stroke-width="1.8">
-					<path d="M 105 64 L 112 67"/><path d="M 117 92 L 124 95"/><path d="M 111 132 L 118 135"/>
+					<path d="M 105 64 L 112 67"/><path d="M 111 132 L 118 135"/>
 				</g>
 			</g>
 
+			<!-- Seven leaves, not twelve. The dense version reads as a clump at
+			     the 54x50px the header renders it at — the house stops being
+			     legible. Thinned to keep all four leaf shapes and the scattered
+			     angles, just fewer of them. The full drawing survives in
+			     assets/images/logo-stacked.svg for large use. -->
 			<g>
 				<use href="#mdLeafSplit" color="var(--wp--preset--color--forest)" transform="translate(58,51) rotate(203) scale(1.15)"/>
-				<use href="#mdLeafHeart" color="var(--wp--preset--color--accent)" transform="translate(58,74) rotate(-12) scale(0.95)"/>
 				<use href="#mdLeafCurl"  color="var(--wp--preset--color--forest)" transform="translate(49,95) rotate(212) scale(1.05)"/>
-				<use href="#mdLeafLance" color="var(--wp--preset--color--accent)" transform="translate(67,123) rotate(-32) scale(0.9)"/>
 				<use href="#mdLeafYoung" color="var(--wp--preset--color--forest)" transform="translate(47,146) rotate(196) scale(0.9)"/>
 
 				<use href="#mdLeafHeart" color="var(--wp--preset--color--accent)" transform="translate(98,54) rotate(-16) scale(1.25)"/>
 				<use href="#mdLeafSplit" color="var(--wp--preset--color--forest)" transform="translate(82,82) rotate(206) scale(1.05)"/>
-				<use href="#mdLeafHeart" color="var(--wp--preset--color--gold)"   transform="translate(103,119) rotate(-28) scale(0.9)"/>
-				<use href="#mdLeafYoung" color="var(--wp--preset--color--accent)" transform="translate(85,152) rotate(198) scale(0.9)"/>
 
 				<use href="#mdLeafHeart" color="var(--wp--preset--color--forest)" transform="translate(112,67) rotate(-26) scale(1.1)"/>
-				<use href="#mdLeafSplit" color="var(--wp--preset--color--accent)" transform="translate(124,95) rotate(-14) scale(0.95)"/>
-				<use href="#mdLeafCurl"  color="var(--wp--preset--color--forest)" transform="translate(118,135) rotate(-34) scale(0.85)"/>
+				<use href="#mdLeafCurl"  color="var(--wp--preset--color--accent)" transform="translate(118,135) rotate(-34) scale(0.85)"/>
 			</g>
 
 			<!-- Blossoms last, so they sit on top of the foliage.
@@ -134,8 +133,6 @@ if ( function_exists( 'mb_strlen' ) && mb_strlen( $moodboard_name ) > $moodboard
 			<g>
 				<use href="#mdBloom" color="var(--wp--preset--color--gold)" transform="translate(58,126) rotate(12) scale(1.0)"/>
 				<use href="#mdBloom" color="var(--wp--preset--color--gold)" transform="translate(99,134) rotate(-18) scale(0.9)"/>
-				<use href="#mdBloom" color="var(--wp--preset--color--gold)" transform="translate(113,150) rotate(8) scale(0.78)"/>
-				<use href="#mdBud"   color="var(--wp--preset--color--gold)" transform="translate(52,152) rotate(22) scale(0.9)"/>
 				<use href="#mdBud"   color="var(--wp--preset--color--gold)" transform="translate(94,160) rotate(-16) scale(0.82)"/>
 			</g>
 
