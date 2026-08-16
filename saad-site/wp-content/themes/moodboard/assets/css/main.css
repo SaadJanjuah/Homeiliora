@@ -299,16 +299,43 @@ html {
 	button[aria-expanded="false"] ~ .wp-block-navigation__submenu-container {
 	display: none;
 }
-/* Give the row a real tap target and turn the chevron when it opens. */
-.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content {
-	padding-block: 0.45rem;
-}
+/* Make it obvious a row expands. Core's chevron is a small separate <span>
+   next to the button, easy to miss on a phone — replaced here with a + / −
+   drawn on the button itself, pushed to the far right so the whole row reads
+   as an accordion and the whole row is the tap target. */
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-icon {
-	transition: transform 0.18s ease;
+	display: none;
 }
 .wp-block-navigation__responsive-container.is-menu-open
-	button[aria-expanded="true"] ~ .wp-block-navigation__submenu-icon {
-	transform: rotate(180deg);
+	.wp-block-navigation-submenu > button.wp-block-navigation-item__content {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	gap: 1rem;
+	padding-block: 0.5rem;
+}
+.wp-block-navigation__responsive-container.is-menu-open
+	.wp-block-navigation-submenu > button.wp-block-navigation-item__content::after {
+	content: "+";
+	flex: 0 0 auto;
+	display: grid;
+	place-items: center;
+	width: 1.6rem;
+	height: 1.6rem;
+	border: 1px solid var(--wp--preset--color--stone);
+	border-radius: 4px;
+	font-size: 1.05rem;
+	line-height: 1;
+	font-weight: 500;
+	color: var(--wp--preset--color--accent);
+	transition: background 0.18s ease, border-color 0.18s ease;
+}
+.wp-block-navigation__responsive-container.is-menu-open
+	.wp-block-navigation-submenu > button[aria-expanded="true"].wp-block-navigation-item__content::after {
+	content: "\2212";                       /* proper minus, not a hyphen */
+	background: var(--wp--preset--color--accent-soft);
+	border-color: var(--wp--preset--color--clay);
 }
 
 /* The submenu is a nested list here, not a floating card. */
@@ -370,14 +397,14 @@ html {
 /* Only the second slide animates; the first sits under it at full opacity. */
 .home-hero__slide--b {
 	opacity: 0;
-	/* 11s, not 16s: at the old timing nothing moved for the first 6.7 seconds,
-	   which reads as a broken slider rather than a slow one. The first fade
-	   now starts at ~3.7s and each photograph holds for about four. */
-	animation: md-hero-crossfade 11s ease-in-out infinite;
+	/* 7s. Started at 16s, then 11s; both left the hero looking static for long
+	   enough that it read as broken. The first fade now begins at ~2s and each
+	   photograph holds roughly three. */
+	animation: md-hero-crossfade 7s ease-in-out infinite;
 }
 @keyframes md-hero-crossfade {
-	0%, 34%  { opacity: 0; }
-	44%, 90% { opacity: 1; }
+	0%, 28%  { opacity: 0; }
+	40%, 88% { opacity: 1; }
 	100%     { opacity: 0; }
 }
 /* The scrim is a HORIZONTAL gradient, not a flat wash.
