@@ -54,9 +54,10 @@
 	   below narrows it on screens too tight to hold rails otherwise. */
 	--md-col-w: 1200px;
 
-	/* Stroked heart for the Saved nav item, used as a mask so it takes the
-	   link's own colour rather than being a fixed-colour image. */
-	--md-heart: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.8 5.6a5.1 5.1 0 0 0-7.2 0L12 7.2l-1.6-1.6a5.1 5.1 0 0 0-7.2 7.2l1.6 1.6L12 21.2l7.2-6.8 1.6-1.6a5.1 5.1 0 0 0 0-7.2z'/%3E%3C/svg%3E");
+	/* Bookmark — the conventional "save" symbol — for the Saved nav item.
+	   Applied as a mask so it takes the link's own colour and follows it on
+	   hover, rather than being a fixed-colour image. */
+	--md-save-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6.5 3h11a1.5 1.5 0 0 1 1.5 1.5V21l-7-4.4L5 21V4.5A1.5 1.5 0 0 1 6.5 3z'/%3E%3C/svg%3E");
 
 }
 
@@ -185,6 +186,22 @@ html {
 .site-nav {
 	font-family: var(--wp--preset--font-family--display);
 }
+
+/* Items with a dropdown render as <button>, the rest as <a>. A button keeps
+   the browser's default 1px padding and its own font metrics, so those two
+   sat exactly 1px lower than their neighbours — enough to read as crooked in
+   a row of six. Reset so both element types share one baseline. The mobile
+   overlay's +/- rules are scoped to .is-menu-open and far more specific, so
+   they are unaffected. */
+.site-nav button.wp-block-navigation-item__content {
+	padding: 0;
+	border: 0;
+	background: none;
+	font: inherit;
+	line-height: inherit;
+	color: inherit;
+	text-align: left;
+}
 .site-nav a {
 	color: var(--wp--preset--color--ink);
 	text-decoration: none;
@@ -194,8 +211,15 @@ html {
 .site-nav .current_page_item > a {
 	color: var(--wp--preset--color--accent);
 }
-/* Understated underline reveal on hover */
-.site-nav .wp-block-navigation-item > a::after {
+/* Understated underline reveal on hover.
+
+   Buttons are included, not just anchors. Dropdown items render as <button>,
+   so previously they got no underline on hover — and, less obviously, no 2px
+   pseudo-element either, which left their box a different height from the
+   links beside them and their labels sitting 1px lower. Giving both the same
+   pseudo fixes the hover state and the alignment in one go. */
+.site-nav .wp-block-navigation-item > a::after,
+.site-nav .wp-block-navigation-item > button::after {
 	content: "";
 	display: block;
 	height: 2px;
@@ -203,6 +227,7 @@ html {
 	background: var(--wp--preset--color--accent);
 	transition: width 0.22s ease;
 }
+.site-nav .wp-block-navigation-item > button:hover::after,
 .site-nav .wp-block-navigation-item > a:hover::after {
 	width: 100%;
 }
@@ -920,11 +945,11 @@ html {
 --------------------------------------------------------------------------- */
 /* Nav "Saved" item + live count badge.
 
-   The label used to carry a literal "♥" character. A text glyph renders at
+   The label used to carry a literal heart character. A text glyph renders at
    whatever weight and baseline the font happens to give it — here it sat
    heavy and slightly low, which is what made it look tacked on. This is a
-   stroked heart drawn at the right weight instead, masked so it inherits the
-   link colour and changes with it on hover. */
+   stroked bookmark drawn at the right weight instead, masked so it inherits
+   the link colour and changes with it on hover. */
 .nav-saved .wp-block-navigation-item__label { white-space: nowrap; }
 /* On the anchor only. Targeting the inner label as well drew the heart
    twice, once on each. */
@@ -936,8 +961,8 @@ html {
 	margin-right: 0.4em;
 	vertical-align: -0.13em;
 	background-color: currentColor;
-	-webkit-mask-image: var(--md-heart);
-	mask-image: var(--md-heart);
+	-webkit-mask-image: var(--md-save-icon);
+	mask-image: var(--md-save-icon);
 	-webkit-mask-repeat: no-repeat;
 	mask-repeat: no-repeat;
 	-webkit-mask-position: center;
