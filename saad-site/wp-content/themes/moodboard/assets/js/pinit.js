@@ -45,7 +45,13 @@
 		btn.target = '_blank';
 		btn.rel = 'noopener nofollow';
 		btn.setAttribute( 'aria-label', 'Save this image to Pinterest' );
-		btn.innerHTML = '<span class="pinit-btn__icon" aria-hidden="true">P</span> Pin it';
+		// Icon only. The label lives in aria-label and the title tooltip — a
+		// text pill this size covered a third of the card.
+		btn.title = 'Save to Pinterest';
+		btn.innerHTML =
+			'<svg class="pinit-btn__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+			'<path d="M12 2a10 10 0 0 0-3.6 19.3c-.1-.8-.2-2 0-2.9l1.2-5s-.3-.6-.3-1.5c0-1.4.8-2.4 1.8-2.4.9 0 1.3.6 1.3 1.4 0 .9-.6 2.2-.9 3.4-.2 1 .5 1.9 1.5 1.9 1.9 0 3.2-2.4 3.2-5.2 0-2.1-1.5-3.7-4.1-3.7-3 0-4.8 2.2-4.8 4.6 0 .9.3 1.5.7 2 .2.2.2.3.1.5l-.2.8c0 .3-.2.4-.5.2-1.3-.5-1.9-2-1.9-3.6 0-2.7 2.3-5.9 6.8-5.9 3.6 0 6 2.6 6 5.4 0 3.7-2.1 6.5-5.1 6.5-1 0-2-.6-2.3-1.2l-.6 2.5c-.2.8-.7 1.7-1.1 2.3A10 10 0 1 0 12 2z"/>' +
+			'</svg>';
 		host.appendChild( btn );
 	}
 

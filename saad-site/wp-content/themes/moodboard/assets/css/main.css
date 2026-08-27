@@ -54,6 +54,10 @@
 	   below narrows it on screens too tight to hold rails otherwise. */
 	--md-col-w: 1200px;
 
+	/* Stroked heart for the Saved nav item, used as a mask so it takes the
+	   link's own colour rather than being a fixed-colour image. */
+	--md-heart: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.8 5.6a5.1 5.1 0 0 0-7.2 0L12 7.2l-1.6-1.6a5.1 5.1 0 0 0-7.2 7.2l1.6 1.6L12 21.2l7.2-6.8 1.6-1.6a5.1 5.1 0 0 0 0-7.2z'/%3E%3C/svg%3E");
+
 }
 
 /* ---------------------------------------------------------------------------
@@ -866,57 +870,81 @@ html {
 /* ---------------------------------------------------------------------------
    Pinterest "Save" hover button on images
 --------------------------------------------------------------------------- */
+/* A small round icon, not a text pill.
+
+   Scoped through .has-pinit and with an explicit height, because core ships
+   `.wp-block-post-featured-image a { display: block; height: 100% }` at a
+   higher specificity than a bare class. That rule was winning: the button
+   rendered as a full-height block, the icon and label stacked, and it came
+   out 71x285px — a green column down a third of the card. */
 .has-pinit { position: relative; }
-.pinit-btn {
+.has-pinit > .pinit-btn {
 	position: absolute;
-	top: 12px;
-	right: 12px;
+	top: 10px;
+	right: 10px;
 	z-index: 3;
-	display: inline-flex;
-	align-items: center;
-	gap: 0.35rem;
-	padding: 0.4rem 0.7rem;
-	font-family: var(--wp--preset--font-family--display);
-	font-size: var(--wp--preset--font-size--meta);
-	font-weight: 600;
-	letter-spacing: 0.03em;
-	color: var(--wp--preset--color--surface);
-	/* Green rather than brass: this is a UI affordance on a photograph, not
-	   the brass call-to-action, and white on green measures 5.88:1. */
-	background: var(--wp--preset--color--accent);
-	border-radius: 999px;
+	display: grid;
+	place-items: center;
+	width: 2rem;
+	height: 2rem;
+	padding: 0;
+	color: #E60023;                      /* Pinterest red — the recognisable cue */
+	background: rgba(255, 255, 255, 0.94);
+	border-radius: 50%;
 	text-decoration: none;
-	box-shadow: 0 6px 16px -6px rgba(var(--md-shadow-rgb), 0.5);
+	box-shadow: 0 4px 12px -4px rgba(var(--md-shadow-rgb), 0.45);
 	opacity: 0;
 	transform: translateY(-4px);
-	transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+	transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease, color 0.2s ease;
 	pointer-events: none;
 }
 .pinit-btn__icon {
-	display: inline-grid;
-	place-items: center;
-	width: 1.05em;
-	height: 1.05em;
-	border-radius: 50%;
-	background: var(--wp--preset--color--surface);
-	color: var(--wp--preset--color--forest);
-	font-weight: 800;
-	font-size: 0.8em;
-	line-height: 1;
+	width: 1.15rem;
+	height: 1.15rem;
+	display: block;
+	fill: currentColor;
 }
-.has-pinit:hover .pinit-btn,
-.pinit-btn:focus-visible {
+.has-pinit:hover > .pinit-btn,
+.has-pinit > .pinit-btn:focus-visible {
 	opacity: 1;
 	transform: translateY(0);
 	pointer-events: auto;
 }
-.pinit-btn:hover { background: var(--wp--preset--color--forest); }
+.has-pinit > .pinit-btn:hover {
+	background: #E60023;
+	color: #FFFFFF;
+}
 
 /* ---------------------------------------------------------------------------
    Bookmarks ("Saved") — nav badge, card save button, saved state, Saved page
 --------------------------------------------------------------------------- */
-/* Nav "Saved" item + live count badge */
+/* Nav "Saved" item + live count badge.
+
+   The label used to carry a literal "♥" character. A text glyph renders at
+   whatever weight and baseline the font happens to give it — here it sat
+   heavy and slightly low, which is what made it look tacked on. This is a
+   stroked heart drawn at the right weight instead, masked so it inherits the
+   link colour and changes with it on hover. */
 .nav-saved .wp-block-navigation-item__label { white-space: nowrap; }
+/* On the anchor only. Targeting the inner label as well drew the heart
+   twice, once on each. */
+.nav-saved > a::before {
+	content: "";
+	display: inline-block;
+	width: 0.95em;
+	height: 0.95em;
+	margin-right: 0.4em;
+	vertical-align: -0.13em;
+	background-color: currentColor;
+	-webkit-mask-image: var(--md-heart);
+	mask-image: var(--md-heart);
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-position: center;
+	mask-position: center;
+	-webkit-mask-size: contain;
+	mask-size: contain;
+}
 .nav-saved a,
 .wp-block-navigation-item.nav-saved > a { position: relative; }
 .saved-badge {
